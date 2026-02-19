@@ -10,436 +10,436 @@ Discord Server - https://discord.gg/y42nVCGZqF
 
 ## Beta Version 2.5
 
-Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
+A Discord Self-Bot for automatic Pokemon hunting in PokeMeow.
 
-⚠️ **WICHTIGER HINWEIS:** Self-Bots verstoßen gegen die Discord Terms of Service und können zu einem permanenten Account-Ban führen. Nutze diesen Bot auf eigene Verantwortung!
+**IMPORTANT NOTE:** Self-Bots violate the Discord Terms of Service and may result in a permanent account ban. Use this bot at your own risk!
 
-**Multi-Account erhöht das Ban-Risiko deutlich, weil:**
+**Multi-Account significantly increases the ban risk because:**
 
-**IP-Verknüpfung:** Discord verbindet alle Accounts über deine IP - wird einer erkannt, fliegen alle gleichzeitig ("Chain-Ban").
+**IP Linking:** Discord connects all accounts via your IP - if one is detected, all get banned simultaneously ("Chain-Ban").
 
-**Auffälliges Muster:** Mehrere Accounts mit identischem, automatisiertem Verhalten zur gleichen Zeit sind extrem leicht zu erkennen.
+**Suspicious Pattern:** Multiple accounts with identical, automated behavior at the same time are extremely easy to detect.
 
-**Mehr API-Traffic:** Jeder zusätzliche Account multipliziert die Anfragen und triggert Rate-Limits/Flags schneller.
+**More API Traffic:** Each additional account multiplies the requests and triggers rate limits/flags faster.
 
-**Grobe Einschätzung:**
+**Rough Estimate:**
 
-| Setup | Relatives Risiko
+| Setup | Relative Risk
 |-----|-----
-| 1 Account, vorsichtig | Basis
-| 2-3 Accounts, gleiche IP | ca. 2-3x höher
-| 5+ Accounts, gleiche IP | deutlich höher
-| Viele Accounts, ohne Proxy/Cooldown | sehr hoch
+| 1 Account, careful | Baseline
+| 2-3 Accounts, same IP | approx. 2-3x higher
+| 5+ Accounts, same IP | significantly higher
+| Many Accounts, no Proxy/Cooldown | very high
 
 ---
 
-## 📋 Features
+## Features
 
-- ✅ Automatische Daily-Tasks (;daily, ;h, ;swap, ;q)
-- ✅ Automatisches Pokemon Hunting (;p mit zufälligen Intervallen)
-- ✅ Halb Automatisches Fischen (;f)
-- ✅ **Auto-Catch basierend auf Rarity** 🎯
-  - Erkennt Pokemon-Rarity automatisch
-  - Klickt passenden Ball-Button (Pokeball, Greatball, Ultraball, Masterball)
-  - **Pokemon-Name** wird erkannt und im Log angezeigt (via `Pokemon_Names.txt`)
-  - **Farbige Konsolen-Ausgabe** pro Rarity + **Catch-Result** (✅/❌)
-- ✅ **Multi-Account Launcher** 🚀
-  - Mehrere Accounts gleichzeitig in eigenen Konsolenfenstern
-  - Zentraler Launcher mit Account-Verwaltung
-- ✅ **Proxy-Support** 🔒
-  - HTTP/HTTPS und SOCKS5 Proxy pro Account
-  - **IP-Check** `[Z]`: Echte IP vs. Proxy-IP vergleichen
-- ✅ **AutoEgg System** 🥚
-  - Hatch + Hold beim Start, automatisch während Hunting
-- ✅ **AutoBuyer System** 🛒
-  - Ball-Bestände überwachen und automatisch nachkaufen
-- ✅ **Auto-Release Duplikate** ♻️
-  - Doppelte Pokemon automatisch releasen (behält Legendary & Shiny)
-- ✅ **Daily Catch-Limit Erkennung** ⛔
-  - Bot pausiert komplett wenn Limit erreicht
-- ✅ **Session-Statistiken & Tracking** 📊
-  - Catch-Rate, Fangquote pro Rarity, Shiny/Legendary Counter
-  - Persistent in `stats.json`, [I] Hotkey
-- ✅ **Discord Webhook Benachrichtigungen** 🔔
-  - Seltene Fänge ans Handy melden lassen
-- ✅ **Captcha-Erkennung & Auto-Solve** 🛡️
-  - 2Captcha + Anti-Captcha, **Guthaben-Abfrage** im Config-Menü
-  - **Report-Feedback**: Meldet korrekte/falsche Lösungen automatisch zurück
-  - Temp-Ban Erkennung
-- ✅ **Hotkeys** ⌨️ — [P] Pause, [I] Stats, [Q/ESC] Stop
-- ✅ Live-Logging in Dateien
+- Auto Daily Tasks (;daily, ;h, ;swap, ;q)
+- Automatic Pokemon Hunting (;p with random intervals)
+- Semi-Automatic Fishing (;f)
+- **Auto-Catch based on Rarity**
+  - Automatically detects Pokemon rarity
+  - Clicks the matching ball button (Pokeball, Greatball, Ultraball, Masterball)
+  - **Pokemon Name** is recognized and displayed in the log (via `Pokemon_Names.txt`)
+  - **Colored console output** per rarity + **Catch Result** (caught/fled)
+- **Multi-Account Launcher**
+  - Multiple accounts simultaneously in their own console windows
+  - Central launcher with account management
+- **Proxy Support**
+  - HTTP/HTTPS and SOCKS5 proxy per account
+  - **IP Check** `[Z]`: Compare real IP vs. proxy IP
+- **AutoEgg System**
+  - Hatch + Hold on startup, automatic during hunting
+- **AutoBuyer System**
+  - Monitor ball inventory and automatically restock
+- **Auto-Release Duplicates**
+  - Automatically release duplicate Pokemon (keeps Legendary & Shiny)
+- **Daily Catch Limit Detection**
+  - Bot pauses completely when limit is reached
+- **Session Statistics & Tracking**
+  - Catch rate, catch rate per rarity, Shiny/Legendary counter
+  - Persistent in `stats.json`, [I] hotkey
+- **Discord Webhook Notifications**
+  - Get notified about rare catches on your phone
+- **Captcha Detection & Auto-Solve**
+  - 2Captcha + Anti-Captcha, **Balance Check** in config menu
+  - **Report Feedback**: Automatically reports correct/incorrect solutions back
+  - Temp-Ban detection
+- **Hotkeys** — [P] Pause, [I] Stats, [Q/ESC] Stop
+- Live logging to files
 
 ---
 
-## 🔧 Installation
+## Installation
 
-### 1. Dateien herunterladen
+### 1. Download Files
 
-Lade alle Dateien herunter und lege sie in einen gemeinsamen Ordner:
+Download all files and place them in a shared folder:
 
-| Datei | Beschreibung |
+| File | Description |
 |-------|-------------|
-| `CatchBot.exe` | Haupt-Bot (Einzel-Account) |
-| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (Hauptbot benötigt) |
-| `Pokemon_Names.txt` | Pokemon-Namensdatenbank |
+| `CatchBot.exe` | Main bot (single account) |
+| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (requires main bot) |
+| `Pokemon_Names.txt` | Pokemon name database |
 
 
-### 2. Antivirus-Hinweis
+### 2. Antivirus Notice
 
-Manche Antivirus-Programme melden `.exe`-Dateien die mit PyInstaller erstellt wurden als verdächtig. Das ist ein **False Positive**. Falls Windows Defender oder ein anderes Programm die Datei blockiert, füge den Ordner zur Ausnahmeliste hinzu.
-
----
-
-## 🚀 Nutzung
-
-### Einzelner Account
-
-Doppelklicke `CatchBot.exe`
-
-### Erste Einrichtung
-
-1. **Token erhalten:**
-   - Öffne Discord im Browser (https://discord.com/app)
-   - Drücke `F12` (bei Opera/GX `STRG+Shift+I`) für Developer Tools
-   - Gehe zum Tab "Network"
-   - Drücke `F5` zum Neuladen
-   - Suche nach "api", "science" oder "ack" in den Requests
-   - Finde den Header "Authorization" - das ist dein Token
-   - ⚠️ **ACHTUNG:** Gib deinen Token niemals an Dritte weiter!
-
-2. **Channel ID erhalten:**
-   - Aktiviere Developer Mode in Discord (Einstellungen → Erweitert → Entwicklermodus)
-   - Rechtsklick auf den Channel → "ID kopieren"
-
-3. **Bot konfigurieren:**
-   - Wähle `[3] Config` im Hauptmenü
-   - Wähle `[8]` und füge deinen Token ein
-   - Wähle `[9]` und füge die Channel ID ein
-   - Konfiguriere Auto-Catch, Ball-Regeln etc.
-
-4. **Bot starten:**
-   - `[1] Start` — Nur Hunting (ohne Daily Tasks)
-   - `[2] Start + Daily Tasks` — Führt erst ;daily, ;h, ;swap, ;q aus, dann Hunting
+Some antivirus programs flag `.exe` files created with PyInstaller as suspicious. This is a **False Positive**. If Windows Defender or another program blocks the file, add the folder to the exception list.
 
 ---
 
-## 🚀 Multi-Account Launcher
+## Usage
 
-Der Multi-Account Launcher ermöglicht es, mehrere Accounts gleichzeitig zu betreiben. Jeder Account bekommt sein eigenes Konsolenfenster und eigene Config/Stats/Logs.
+### Single Account
 
-### Starten
+Double-click `CatchBot.exe`
 
-Doppelklicke `Catchbot-Multi-Acc-launcher.exe`
+### First-Time Setup
 
-### Launcher-Menü
+1. **Get your Token:**
+   - Open Discord in your browser (https://discord.com/app)
+   - Press `F12` (on Opera/GX use `CTRL+Shift+I`) for Developer Tools
+   - Go to the "Network" tab
+   - Press `F5` to reload
+   - Search for "api", "science" or "ack" in the requests
+   - Find the "Authorization" header - that is your token
+   - **WARNING:** Never share your token with anyone!
 
-| Taste | Funktion |
+2. **Get your Channel ID:**
+   - Enable Developer Mode in Discord (Settings > Advanced > Developer Mode)
+   - Right-click on the channel > "Copy ID"
+
+3. **Configure the bot:**
+   - Select `[3] Config` in the main menu
+   - Select `[8]` and paste your token
+   - Select `[9]` and paste the channel ID
+   - Configure Auto-Catch, ball rules, etc.
+
+4. **Start the bot:**
+   - `[1] Start` — Hunting only (without daily tasks)
+   - `[2] Start + Daily Tasks` — Runs ;daily, ;h, ;swap, ;q first, then hunting
+
+---
+
+## Multi-Account Launcher
+
+The Multi-Account Launcher allows you to run multiple accounts simultaneously. Each account gets its own console window and separate config/stats/logs.
+
+### Starting
+
+Double-click `Catchbot-Multi-Acc-launcher.exe`
+
+### Launcher Menu
+
+| Key | Function |
 |-------|----------|
-| **A** | Neuen Account hinzufügen (z.B. "main", "alt1", "alt2") |
-| **K** | Account konfigurieren (öffnet CatchBot Config-Menü) |
-| **S** | Alle bereiten Accounts gleichzeitig starten |
-| **1-9** | Einzelnen Account starten/konfigurieren |
-| **P** | Laufende Prozesse anzeigen / alle beenden |
-| **D** | Account deaktivieren / aktivieren |
-| **R** | Account aus der Liste entfernen |
-| **Q** | Beenden |
+| **A** | Add new account (e.g. "main", "alt1", "alt2") |
+| **K** | Configure account (opens CatchBot config menu) |
+| **S** | Start all ready accounts simultaneously |
+| **1-9** | Start/configure individual account |
+| **P** | Show running processes / terminate all |
+| **D** | Disable / enable account |
+| **R** | Remove account from list |
+| **Q** | Exit |
 
 ### Workflow
 
-1. `Catchbot-Multi-Acc-launcher.exe` starten
-2. `[A]` Account hinzufügen (Name eingeben, z.B. "main")
-3. `[K]` Token, Channel ID und **Proxy** für den Account setzen
-4. Schritte 2-3 für weitere Accounts wiederholen
-5. `[S]` Alle Accounts gleichzeitig starten
+1. Start `Catchbot-Multi-Acc-launcher.exe`
+2. `[A]` Add account (enter name, e.g. "main")
+3. `[K]` Set token, channel ID and **proxy** for the account
+4. Repeat steps 2-3 for additional accounts
+5. `[S]` Start all accounts simultaneously
 
-### Dateien pro Account
+### Files per Account
 
-Jeder Account bekommt eigene Dateien:
-- `config_<n>.json` — Konfiguration (inkl. Proxy)
-- `stats_<n>.json` — Persistente Statistiken
-- `logs/<n>/` — Log-Dateien
+Each account gets its own files:
+- `config_<n>.json` — Configuration (incl. proxy)
+- `stats_<n>.json` — Persistent statistics
+- `logs/<n>/` — Log files
 
 ---
 
-## 🔒 Proxy-Support
+## Proxy Support
 
-Für Multi-Account wird dringend empfohlen, **jedem Account einen eigenen Proxy** zu geben, damit Discord nicht mehrere Accounts von der gleichen IP sieht.
+For multi-account usage, it is strongly recommended to **assign each account its own proxy** so Discord does not see multiple accounts from the same IP.
 
-### WICHTIG: Proxy richtig nutzen
+### IMPORTANT: Using Proxies Correctly
 
-> **Wenn du einen Proxy im Bot nutzt, MUSS auch dein Browser (in dem du den Discord-Account manuell nutzt) denselben Proxy verwenden!**
+> **If you use a proxy in the bot, your browser (where you manually use the Discord account) MUST also use the same proxy!**
 >
-> Sonst sieht Discord, dass der Account gleichzeitig oder abwechselnd von verschiedenen Standorten (z.B. Deutschland im Browser, Tokyo im Bot) aktiv ist. Das wird als "Impossible Travel" erkannt und kann zum Ban führen.
+> Otherwise, Discord sees the account active from different locations simultaneously or alternately (e.g. Germany in the browser, Tokyo in the bot). This is detected as "Impossible Travel" and can lead to a ban.
 >
-> **Regeln:**
-> - Jedes Gerät/Browser das denselben Account nutzt, muss denselben Proxy verwenden
-> - Wenn mehrere Personen den gleichen Account botten, müssen alle denselben Proxy nutzen
-> - Deutsche Residential Proxies sind weniger auffällig wenn man selbst in DE ist
-> - **Ohne Proxy ist man sicherer als mit falsch konfiguriertem Proxy!**
+> **Rules:**
+> - Every device/browser using the same account must use the same proxy
+> - If multiple people are botting the same account, they must all use the same proxy
+> - Residential proxies from your own country are less suspicious
+> - **No proxy is safer than a misconfigured proxy!**
 
-### Proxy setzen
+### Setting a Proxy
 
-Config → `[Y]` → Proxy-URL eingeben
+Config > `[Y]` > Enter proxy URL
 
-### IP-Check
+### IP Check
 
-Config → `[Z]` prüft ob der Proxy korrekt funktioniert:
-- Zeigt deine **echte IP** (direkte Verbindung)
-- Zeigt die **Proxy-IP** (Verbindung über Proxy)
-- Vergleicht beide: Wenn sie unterschiedlich sind → Proxy funktioniert ✓
-- Warnung wenn beide IPs identisch sind → Proxy leitet nicht korrekt weiter
+Config > `[Z]` checks whether the proxy is working correctly:
+- Shows your **real IP** (direct connection)
+- Shows the **proxy IP** (connection via proxy)
+- Compares both: If they are different > Proxy is working
+- Warning if both IPs are identical > Proxy is not forwarding correctly
 
-### Unterstützte Formate
+### Supported Formats
 
-| Typ | Format | Beispiel |
+| Type | Format | Example |
 |-----|--------|----------|
 | HTTP | `http://host:port` | `http://proxy.example.com:8080` |
-| HTTP mit Auth | `http://user:pass@host:port` | `http://myuser:mypass@proxy.example.com:8080` |
+| HTTP with Auth | `http://user:pass@host:port` | `http://myuser:mypass@proxy.example.com:8080` |
 | SOCKS5 | `socks5://host:port` | `socks5://proxy.example.com:1080` |
-| SOCKS5 mit Auth | `socks5://user:pass@host:port` | `socks5://myuser:mypass@proxy.example.com:1080` |
+| SOCKS5 with Auth | `socks5://user:pass@host:port` | `socks5://myuser:mypass@proxy.example.com:1080` |
 
-### Proxy-Anbieter Empfehlung
-- **Residential Proxies** — Sehen aus wie echte Heim-IPs, am sichersten
-- **Datacenter Proxies** — Günstiger, aber leichter erkennbar
-- **Tipp:** Deutsche Residential Proxies wenn man selbst in DE ist
+### Proxy Provider Recommendation
+- **Residential Proxies** — Look like real home IPs, safest option
+- **Datacenter Proxies** — Cheaper, but easier to detect
+- **Tip:** Use residential proxies from your own country
 
 ---
 
-## ⚙️ Config-Übersicht
+## Config Overview
 
-### Hauptmenü
+### Main Menu
 
-| Option | Taste | Beschreibung |
+| Option | Key | Description |
 |--------|-------|-------------|
-| Start | [1] | Hunting starten (ohne Daily Tasks) |
-| Start + Daily Tasks | [2] | Dailys ausführen, dann Hunting |
-| Config | [3] | Konfigurationsmenü öffnen |
-| Logs | [4] | Log-Dateien anzeigen |
-| Update-Checker | [5] | Auf neue Version prüfen |
-| Beenden | [6] | Bot beenden |
+| Start | [1] | Start hunting (without daily tasks) |
+| Start + Daily Tasks | [2] | Run dailies, then hunting |
+| Config | [3] | Open configuration menu |
+| Logs | [4] | View log files |
+| Update Checker | [5] | Check for new version |
+| Exit | [6] | Exit bot |
 
-### Config-Menü
+### Config Menu
 
-| Option | Taste | Beschreibung | Standard |
+| Option | Key | Description | Default |
 |--------|-------|-------------|----------|
-| **═══ Hunting ═══** | | | |
-| Auto-Catch | [1] | Automatisch fangen an/aus | ✅ An |
-| Ball-Regeln | [2] | Ball pro Rarity einstellen | Standard |
-| Fish | [3] | Fischen an/aus | ❌ Aus |
-| **═══ Systeme ═══** | | | |
-| AutoBuyer | [B] | Ball-Kauf Konfiguration | ❌ Aus |
-| AutoEgg | [E] | Egg Hatch/Hold an/aus | ❌ Aus |
-| Webhook | [W] | Discord Webhook einrichten | ❌ Aus |
-| **═══ Captcha ═══** | | | |
-| Captcha-Service | [D] | 2Captcha / Anti-Captcha / Manuell | Manuell |
-| 2Captcha Key | [C] | API Key setzen | - |
-| Anti-Captcha Key | [K] | API Key setzen | - |
-| Guthaben | [G] | Guthaben beider Services prüfen | - |
-| **═══ Auto-Release ═══** | | | |
-| Auto-Release | [X] | Duplikate releasen an/aus | ❌ Aus |
-| Intervall | [V] | Alle X Catches releasen | 50 |
-| **═══ Einstellungen ═══** | | | |
-| Token | [8] | Discord Token setzen | - |
-| Channel ID | [9] | Channel ID setzen | - |
-| Proxy | [Y] | Proxy URL setzen (HTTP/SOCKS5) | - |
-| IP-Check | [Z] | Echte IP vs. Proxy-IP prüfen | - |
+| **=== Hunting ===** | | | |
+| Auto-Catch | [1] | Toggle automatic catching on/off | On |
+| Ball Rules | [2] | Set ball per rarity | Default |
+| Fish | [3] | Toggle fishing on/off | Off |
+| **=== Systems ===** | | | |
+| AutoBuyer | [B] | Ball purchase configuration | Off |
+| AutoEgg | [E] | Toggle egg hatch/hold on/off | Off |
+| Webhook | [W] | Set up Discord webhook | Off |
+| **=== Captcha ===** | | | |
+| Captcha Service | [D] | 2Captcha / Anti-Captcha / Manual | Manual |
+| 2Captcha Key | [C] | Set API key | - |
+| Anti-Captcha Key | [K] | Set API key | - |
+| Balance | [G] | Check balance of both services | - |
+| **=== Auto-Release ===** | | | |
+| Auto-Release | [X] | Toggle duplicate release on/off | Off |
+| Interval | [V] | Release every X catches | 50 |
+| **=== Settings ===** | | | |
+| Token | [8] | Set Discord token | - |
+| Channel ID | [9] | Set channel ID | - |
+| Proxy | [Y] | Set proxy URL (HTTP/SOCKS5) | - |
+| IP Check | [Z] | Check real IP vs. proxy IP | - |
 
-### 🎯 Auto-Catch Ball-Regeln & Farben
+### Auto-Catch Ball Rules & Colors
 
-Jede Rarity hat ihre eigene Farbe in der Konsole + Catch-Result + Pokemon-Name:
+Each rarity has its own color in the console + catch result + Pokemon name:
 
-| Rarity | Ball | Button | Konsolen-Farbe |
+| Rarity | Ball | Button | Console Color |
 |--------|------|--------|----------------|
-| Common | Pokeball | 1. (ganz links) | 🔵 Blau |
-| Uncommon | Pokeball | 1. (ganz links) | 🔵 Blau |
-| Rare | Greatball | 2. (von links) | 🟡 Orange/Gelb |
-| Super Rare | Ultraball | 3. (von links) | 🟡 Hellgelb |
-| Legendary | Masterball | 5. (ganz rechts) | 🟣 Lila |
-| Shiny | Masterball | 5. (ganz rechts) | 🩷 Pink/Rosa |
+| Common | Pokeball | 1st (far left) | Blue |
+| Uncommon | Pokeball | 1st (far left) | Blue |
+| Rare | Greatball | 2nd (from left) | Orange/Yellow |
+| Super Rare | Ultraball | 3rd (from left) | Light Yellow |
+| Legendary | Masterball | 5th (far right) | Purple |
+| Shiny | Masterball | 5th (far right) | Pink |
 
-**Beispiel-Ausgabe:**
+**Example Output:**
 ```
-[23:49:57] 🎯 UNCOMMON (Wingull) → Pokeball geklickt! (Button 0) ✅ Gefangen
-[23:50:12] 🎯 RARE (Eevee) → Greatball geklickt! (Button 1) ❌ Geflohen
-[23:50:45] 🎯 LEGENDARY (Mewtwo) → Masterball geklickt! (Button 4) ✅ Gefangen
+[23:49:57] UNCOMMON (Wingull) > Pokeball clicked! (Button 0) Caught
+[23:50:12] RARE (Eevee) > Greatball clicked! (Button 1) Fled
+[23:50:45] LEGENDARY (Mewtwo) > Masterball clicked! (Button 4) Caught
 ```
 
-### 📖 Pokemon-Namens-Erkennung
+### Pokemon Name Recognition
 
-Die Datei `Pokemon_Names.txt` enthält alle bekannten Pokemon-Namen. Der Bot:
-- Bereinigt Discord-Markdown und Emojis aus den Nachrichten
-- Sucht nach Pokemon-Namen (längste zuerst: "Tapu Koko" vor "Koko", "Mewtwo" vor "Mew")
-- Zeigt den erkannten Namen im Log und in der Konsole
+The file `Pokemon_Names.txt` contains all known Pokemon names. The bot:
+- Cleans Discord markdown and emojis from messages
+- Searches for Pokemon names (longest first: "Tapu Koko" before "Koko", "Mewtwo" before "Mew")
+- Displays the recognized name in the log and console
 
-> **Wichtig:** `Pokemon_Names.txt` muss im selben Ordner wie `CatchBot.exe` liegen. Falls die Datei fehlt, funktioniert der Bot trotzdem — die Namens-Erkennung ist dann nur eingeschränkt.
+> **Important:** `Pokemon_Names.txt` must be in the same folder as `CatchBot.exe`. If the file is missing, the bot still works — name recognition will just be limited.
 
-### 🛒 AutoBuyer System
+### AutoBuyer System
 
-**Config → [B]** öffnet das AutoBuyer-Fenster:
+**Config > [B]** opens the AutoBuyer window:
 
-| Option | Taste | Beschreibung |
+| Option | Key | Description |
 |--------|-------|--------------|
-| An/Aus | [1] | AutoBuyer aktivieren/deaktivieren |
-| Pokeball | [2] | Schwellenwert + Kaufmenge einstellen |
-| Greatball | [3] | Schwellenwert + Kaufmenge einstellen |
-| Ultraball | [4] | Schwellenwert + Kaufmenge einstellen |
-| Masterball | [5] | Schwellenwert + Kaufmenge einstellen |
-| Reset | [6] | Standard-Werte wiederherstellen |
+| On/Off | [1] | Enable/disable AutoBuyer |
+| Pokeball | [2] | Set threshold + purchase amount |
+| Greatball | [3] | Set threshold + purchase amount |
+| Ultraball | [4] | Set threshold + purchase amount |
+| Masterball | [5] | Set threshold + purchase amount |
+| Reset | [6] | Restore default values |
 
-**Standard-Werte:**
+**Default Values:**
 
-| Ball | Kaufen wenn ≤ | Kaufmenge | Command |
+| Ball | Buy when <= | Purchase Amount | Command |
 |------|---------------|-----------|---------|
-| Pokeball | ≤ 10 | 200x | `;shop buy pb 200` |
-| Greatball | ≤ 10 | 100x | `;shop buy gb 100` |
-| Ultraball | ≤ 10 | 25x | `;shop buy ub 25` |
-| Masterball | ≤ 1 | 1x | `;shop buy mb 1` |
+| Pokeball | <= 10 | 200x | `;shop buy pb 200` |
+| Greatball | <= 10 | 100x | `;shop buy gb 100` |
+| Ultraball | <= 10 | 25x | `;shop buy ub 25` |
+| Masterball | <= 1 | 1x | `;shop buy mb 1` |
 
-### ♻️ Auto-Release Duplikate
+### Auto-Release Duplicates
 
-Automatisch doppelte Pokemon releasen mit dem PokéMeow Command `;release duplicates`. Behält Legendary und Shiny automatisch.
+Automatically release duplicate Pokemon using the PokeMeow command `;release duplicates`. Keeps Legendary and Shiny automatically.
 
-| Option | Taste | Beschreibung |
+| Option | Key | Description |
 |--------|-------|--------------|
-| An/Aus | [X] | Auto-Release aktivieren/deaktivieren |
-| Intervall | [V] | Alle X Catches releasen (Standard: 50) |
+| On/Off | [X] | Enable/disable Auto-Release |
+| Interval | [V] | Release every X catches (default: 50) |
 
-### 📊 Session-Statistiken & Tracking
+### Session Statistics & Tracking
 
-Drücke **[I]** während der Bot läuft um die aktuelle Statistik zu sehen. Beim Beenden wird sie automatisch angezeigt.
+Press **[I]** while the bot is running to view current statistics. On exit, they are displayed automatically.
 
-**Session-Stats (pro Bot-Start):**
-- Encounters, Gefangen, Geflohen, Catch-Rate %
-- Catch-Rate pro Rarity aufgeschlüsselt
-- Beste Fänge (Shiny, Legendary, Super Rare)
-- Session-Dauer
+**Session Stats (per bot start):**
+- Encounters, Caught, Fled, Catch Rate %
+- Catch rate broken down by rarity
+- Best catches (Shiny, Legendary, Super Rare)
+- Session duration
 
 **All-Time Stats (persistent in `stats.json`):**
-- Gefangen/Geflohen gesamt über alle Sessions
-- Shinys gefangen (mit Name + Datum)
-- Legendarys gefangen (mit Name + Datum)
-- Anzahl Sessions
+- Total caught/fled across all sessions
+- Shinies caught (with name + date)
+- Legendaries caught (with name + date)
+- Number of sessions
 
-### 🔔 Discord Webhook einrichten
+### Set Up Discord Webhook
 
-Lass dir seltene Fänge auf dein Handy schicken!
+Get rare catches sent to your phone!
 
-**Config → [W]** öffnet das Webhook-Fenster:
+**Config > [W]** opens the webhook window:
 
-1. Erstelle einen Webhook in deinem Discord-Channel:
-   - Channel → Bearbeiten → Integrationen → Webhooks → Neuer Webhook
-   - Webhook URL kopieren
-2. Config → [W] → [2] → URL einfügen
-3. Config → [W] → [1] → Webhook aktivieren
-4. Optional: Einstellen welche Rarities gemeldet werden (Standard: Legendary + Shiny)
+1. Create a webhook in your Discord channel:
+   - Channel > Edit > Integrations > Webhooks > New Webhook
+   - Copy the webhook URL
+2. Config > [W] > [2] > Paste URL
+3. Config > [W] > [1] > Enable webhook
+4. Optional: Configure which rarities are reported (default: Legendary + Shiny)
 
-| Option | Taste | Beschreibung |
+| Option | Key | Description |
 |--------|-------|--------------|
-| An/Aus | [1] | Webhook aktivieren/deaktivieren |
-| URL | [2] | Webhook URL setzen |
-| Common | [3] | Common Fänge melden |
-| Uncommon | [4] | Uncommon Fänge melden |
-| Rare | [5] | Rare Fänge melden |
-| Super Rare | [6] | Super Rare Fänge melden |
-| Legendary | [7] | Legendary Fänge melden (Standard: ✅) |
-| Shiny | [8] | Shiny Fänge melden (Standard: ✅) |
-| Geflohen | [9] | Auch bei Geflohen melden |
-| Catch-Limit | [L] | Catch-Limit Warnung melden |
+| On/Off | [1] | Enable/disable webhook |
+| URL | [2] | Set webhook URL |
+| Common | [3] | Report Common catches |
+| Uncommon | [4] | Report Uncommon catches |
+| Rare | [5] | Report Rare catches |
+| Super Rare | [6] | Report Super Rare catches |
+| Legendary | [7] | Report Legendary catches (default: on) |
+| Shiny | [8] | Report Shiny catches (default: on) |
+| Fled | [9] | Also report when fled |
+| Catch Limit | [L] | Report catch limit warning |
 
-### 🤖 Captcha Auto-Solve einrichten
+### Captcha Auto-Solve Setup
 
-Du kannst zwischen **2Captcha** und **Anti-Captcha** wählen. Die Erkennung ist **optimiert für PokéMeow**: Nur Zahlen 1-9, 3-6 Stellen.
+You can choose between **2Captcha** and **Anti-Captcha**. Detection is **optimized for PokeMeow**: Numbers only 1-9, 3-6 digits.
 
 **Option A: 2Captcha**
-1. Account auf https://2captcha.com erstellen
-2. Config → `[D]` → "2Captcha" wählen
-3. Config → `[C]` → API Key einfügen
-4. Auto-Solve wird automatisch aktiviert
+1. Create an account at https://2captcha.com
+2. Config > `[D]` > Select "2Captcha"
+3. Config > `[C]` > Paste API key
+4. Auto-Solve is activated automatically
 
 **Option B: Anti-Captcha**
-1. Account auf https://anti-captcha.com erstellen
-2. Config → `[D]` → "Anti-Captcha" wählen
-3. Config → `[K]` → API Key einfügen
-4. Auto-Solve wird automatisch aktiviert
+1. Create an account at https://anti-captcha.com
+2. Config > `[D]` > Select "Anti-Captcha"
+3. Config > `[K]` > Paste API key
+4. Auto-Solve is activated automatically
 
-**Guthaben prüfen:** Config → `[G]` zeigt das aktuelle Guthaben beider Services an (farbig: Grün >$1, Gelb >$0.20, Rot <$0.20).
+**Check Balance:** Config > `[G]` shows the current balance of both services (color-coded: Green >$1, Yellow >$0.20, Red <$0.20).
 
-**Report-Feedback:** Nach jedem Captcha-Versuch meldet der Bot dem Service automatisch zurück ob die Lösung korrekt oder falsch war. Bei 2Captcha verbessert das die Worker-Qualität, bei Anti-Captcha kann eine falsche Lösung zu einer Rückerstattung führen.
+**Report Feedback:** After each captcha attempt, the bot automatically reports back to the service whether the solution was correct or incorrect. With 2Captcha, this improves worker quality; with Anti-Captcha, an incorrect solution can lead to a refund.
 
-### ⛔ Temp-Ban & Catch-Limit Erkennung
+### Temp-Ban & Catch Limit Detection
 
-**Temp-Ban:** Bot pausiert komplett + Warnung + Alarm. Mit [P] fortsetzen.
+**Temp-Ban:** Bot pauses completely + warning + alarm. Continue with [P].
 
-**Daily Catch-Limit:** Bot pausiert komplett + Warnung + Alarm + Webhook-Alert. Vote oder werde Patreon Supporter um das Limit zu entfernen. Mit [P] fortsetzen.
+**Daily Catch Limit:** Bot pauses completely + warning + alarm + webhook alert. Vote or become a Patreon Supporter to remove the limit. Continue with [P].
 
-### ⌨️ Hotkeys (während Bot läuft)
+### Hotkeys (while bot is running)
 
-| Taste | Funktion |
+| Key | Function |
 |-------|----------|
-| **P** | Pause / Resume / Temp-Ban / Catch-Limit aufheben |
-| **I** | Session-Statistiken anzeigen |
-| **Q** oder **ESC** | Zurück ins Hauptmenü |
+| **P** | Pause / Resume / Lift Temp-Ban / Catch Limit |
+| **I** | Show session statistics |
+| **Q** or **ESC** | Return to main menu |
 
 ---
 
-## 📁 Dateien
+## Files
 
-| Datei | Beschreibung |
+| File | Description |
 |-------|-------------|
-| `CatchBot.exe` | Haupt-Bot (Einzel-Account) |
+| `CatchBot.exe` | Main bot (single account) |
 | `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher |
-| `Pokemon_Names.txt` | Pokemon-Namensdatenbank (muss im selben Ordner liegen) |
-| `requirements.txt` | Referenz der verwendeten Libraries |
-| `config.json` | Konfiguration (wird automatisch erstellt) |
-| `config_<n>.json` | Config pro Account (Multi-Acc) |
-| `stats.json` | Persistente Statistiken |
-| `stats_<n>.json` | Stats pro Account (Multi-Acc) |
-| `launcher_config.json` | Launcher-Konfiguration (Accountliste) |
-| `logs/` | Log-Dateien pro Session |
+| `Pokemon_Names.txt` | Pokemon name database (must be in the same folder) |
+| `requirements.txt` | Reference of used libraries |
+| `config.json` | Configuration (created automatically) |
+| `config_<n>.json` | Config per account (multi-acc) |
+| `stats.json` | Persistent statistics |
+| `stats_<n>.json` | Stats per account (multi-acc) |
+| `launcher_config.json` | Launcher configuration (account list) |
+| `logs/` | Log files per session |
 
 ---
 
-## ⚠️ Wichtige Hinweise
+## Important Notes
 
-1. **Account-Sicherheit:** Nutze einen Alt-Account, nicht deinen Haupt-Account
-2. **Rate-Limiting:** Der Bot nutzt zufällige Intervalle, trotzdem kann Discord Rate-Limiting anwenden
-3. **Token-Sicherheit:** Gib deinen Token niemals weiter, teile `config.json` nicht mit anderen
-4. **Multi-Account:** Nutze verschiedene Proxies pro Account um Ban-Gefahr zu minimieren
-5. **Rechtliches:** Self-Bots verstoßen gegen Discord ToS, Nutzung auf eigene Verantwortung
-6. **Antivirus:** Falls die `.exe` blockiert wird, ist das ein False Positive — zur Ausnahmeliste hinzufügen
+1. **Account Safety:** Use an alt account, not your main account
+2. **Rate Limiting:** The bot uses random intervals, but Discord may still apply rate limiting
+3. **Token Safety:** Never share your token, do not share `config.json` with others
+4. **Multi-Account:** Use different proxies per account to minimize ban risk
+5. **Legal:** Self-Bots violate Discord ToS, use at your own risk
+6. **Antivirus:** If the `.exe` is blocked, it is a False Positive — add to exception list
 
 ---
 
-## 🛠 Troubleshooting
+## Troubleshooting
 
-| Problem | Lösung |
+| Problem | Solution |
 |---------|--------|
-| `.exe` wird vom Antivirus blockiert | Ordner zur Ausnahmeliste hinzufügen (False Positive) |
-| Windows SmartScreen blockiert Start | "Weitere Informationen" → "Trotzdem ausführen" |
-| Login fehlgeschlagen | Token überprüfen oder neuen holen |
-| Channel nicht gefunden | Channel ID überprüfen |
-| Bot wirft falschen Ball | Ball-Regeln in Config [2] prüfen |
-| Pokemon-Name nicht erkannt | `Pokemon_Names.txt` im selben Ordner wie `CatchBot.exe` ablegen |
-| AutoBuyer kauft nicht | Config → [B] → aktivieren + Schwellenwerte prüfen |
-| Auto-Release geht nicht | Config → [X] → aktivieren + Intervall prüfen |
-| Webhook geht nicht | Config → [W] → URL prüfen, muss mit `https://discord.com/api/webhooks/` starten |
-| Captcha-Guthaben leer | Config → [G] → Guthaben prüfen, ggf. aufladen |
-| Stats werden nicht gespeichert | Schreibrechte im Ordner prüfen |
-| Auto-Solve funktioniert nicht | API Key prüfen, Guthaben prüfen |
-| Bot pausiert nach Temp-Ban | Warte bis Ban abgelaufen, dann [P] drücken |
-| Bot pausiert nach Catch-Limit | Vote/Patreon oder warten, dann [P] drücken |
-| Multi-Acc startet nicht | `Catchbot-Multi-Acc-launcher.exe` nutzen |
-| Proxy funktioniert nicht | URL-Format prüfen: `http://host:port` oder `socks5://host:port` |
-| IP-Check zeigt gleiche IPs | Proxy leitet nicht weiter, anderen Proxy/Port testen |
-| Connection Error mit Proxy | Proxy erreichbar? Credentials korrekt? |
+| `.exe` blocked by antivirus | Add folder to exception list (False Positive) |
+| Windows SmartScreen blocks launch | "More info" > "Run anyway" |
+| Login failed | Check token or get a new one |
+| Channel not found | Check channel ID |
+| Bot throws wrong ball | Check ball rules in Config [2] |
+| Pokemon name not recognized | Place `Pokemon_Names.txt` in the same folder as `CatchBot.exe` |
+| AutoBuyer not buying | Config > [B] > Enable + check thresholds |
+| Auto-Release not working | Config > [X] > Enable + check interval |
+| Webhook not working | Config > [W] > Check URL, must start with `https://discord.com/api/webhooks/` |
+| Captcha balance empty | Config > [G] > Check balance, top up if needed |
+| Stats not saving | Check write permissions in the folder |
+| Auto-Solve not working | Check API key, check balance |
+| Bot pauses after temp-ban | Wait until ban expires, then press [P] |
+| Bot pauses after catch limit | Vote/Patreon or wait, then press [P] |
+| Multi-Acc not starting | Use `Catchbot-Multi-Acc-launcher.exe` |
+| Proxy not working | Check URL format: `http://host:port` or `socks5://host:port` |
+| IP Check shows same IPs | Proxy is not forwarding, try a different proxy/port |
+| Connection error with proxy | Is the proxy reachable? Are credentials correct? |
 
 ---
 
-## 📜 Lizenz
+## License
 
-Dieses Projekt dient nur zu Bildungszwecken. Die Nutzung erfolgt auf eigenes Risiko.
+This project is for educational purposes only. Use at your own risk.
 
 ---
 
 **Version:** Beta 2.5
-**Erstellt von:** MyNameIsKillua
+**Created by:** MyNameIsKillua
