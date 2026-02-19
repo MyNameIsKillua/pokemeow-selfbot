@@ -31,7 +31,22 @@
 </div>
 
 > [!CAUTION]
-> Self-Bots violate the Discord Terms of Service and may result in a **permanent account ban**. Use at your own risk. Always use an alt account.
+> **Self-Bots violate the Discord Terms of Service** and may result in a **permanent account ban**. Use at your own risk. Always use an alt account.
+>
+> **Multi-Account significantly increases the ban risk because:**
+>
+> | Factor | Why it matters |
+> |:-------|:---------------|
+> | **IP Linking** | Discord connects all accounts via your IP -- if one is detected, all get banned simultaneously ("Chain-Ban"). |
+> | **Suspicious Patterns** | Multiple accounts with identical, automated behavior at the same time are extremely easy to detect. |
+> | **More API Traffic** | Each additional account multiplies the requests and triggers rate limits/flags faster. |
+>
+> | Setup | Relative Risk |
+> |:------|:--------------|
+> | 1 Account, careful | Baseline |
+> | 2-3 Accounts, same IP | ~2-3x higher |
+> | 5+ Accounts, same IP | Significantly higher |
+> | Many Accounts, no Proxy/Cooldown | Very high |
 
 <br>
 
@@ -93,7 +108,7 @@
 | File | Description |
 |:-----|:------------|
 | `CatchBot.exe` | Main bot (single account) |
-| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher |
+| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (required Main Bot) |
 | `Pokemon_Names.txt` | Pokemon name database |
 
 Download all files and place them in a **shared folder**.
@@ -413,7 +428,6 @@ CatchBot/
 ├── CatchBot.exe                     # Main bot
 ├── Catchbot-Multi-Acc-launcher.exe  # Multi-Account Launcher
 ├── Pokemon_Names.txt                # Pokemon name database
-├── requirements.txt                 # Python dependencies reference
 ├── config.json                      # Configuration (auto-created)
 ├── config_<name>.json               # Per-account config (multi-acc)
 ├── stats.json                       # Persistent statistics
