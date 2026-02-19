@@ -1,23 +1,25 @@
 # CatchBot by MyNameIsKillua
-## Beta Version 2.4
+## Beta Version 2.5
 
 Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
 
 ⚠️ **WICHTIGER HINWEIS:** Self-Bots verstoßen gegen die Discord Terms of Service und können zu einem permanenten Account-Ban führen. Nutze diesen Bot auf eigene Verantwortung!
 
 **Multi-Account erhöht das Ban-Risiko deutlich, weil:**
-**IP-Verknuepfung:** Discord verbindet alle Accounts ueber deine IP - wird einer erkannt, fliegen alle gleichzeitig ("Chain-Ban").
-**Auffaelliges Muster:** Mehrere Accounts mit identischem, automatisiertem Verhalten zur gleichen Zeit sind extrem leicht zu erkennen.
-**Mehr API-Traffic:** Jeder zusaetzliche Account multipliziert die Anfragen und triggert Rate-Limits/Flags schneller.
+**IP-Verknüpfung:** Discord verbindet alle Accounts über deine IP - wird einer erkannt, fliegen alle gleichzeitig ("Chain-Ban").
+**Auffälliges Muster:** Mehrere Accounts mit identischem, automatisiertem Verhalten zur gleichen Zeit sind extrem leicht zu erkennen.
+**Mehr API-Traffic:** Jeder zusätzliche Account multipliziert die Anfragen und triggert Rate-Limits/Flags schneller.
 
-**Grobe Einschaetzung:**
+**Grobe Einschätzung:**
 
 | Setup | Relatives Risiko
 |-----|-----
 | 1 Account, vorsichtig | Basis
-| 2-3 Accounts, gleiche IP | ca. 2-3x hoeher
-| 5+ Accounts, gleiche IP | deutlich hoeher
+| 2-3 Accounts, gleiche IP | ca. 2-3x höher
+| 5+ Accounts, gleiche IP | deutlich höher
 | Viele Accounts, ohne Proxy/Cooldown | sehr hoch
+
+---
 
 ## 📋 Features
 
@@ -34,7 +36,6 @@ Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
   - Zentraler Launcher mit Account-Verwaltung
 - ✅ **Proxy-Support** 🔒
   - HTTP/HTTPS und SOCKS5 Proxy pro Account
-  - Für Multi-Account empfohlen: Jeder Account eigene IP
   - **IP-Check** `[Z]`: Echte IP vs. Proxy-IP vergleichen
 - ✅ **AutoEgg System** 🥚
   - Hatch + Hold beim Start, automatisch während Hunting
@@ -50,7 +51,8 @@ Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
 - ✅ **Discord Webhook Benachrichtigungen** 🔔
   - Seltene Fänge ans Handy melden lassen
 - ✅ **Captcha-Erkennung & Auto-Solve** 🛡️
-  - 2Captcha + CapSolver, **Guthaben-Abfrage** im Config-Menü
+  - 2Captcha + Anti-Captcha, **Guthaben-Abfrage** im Config-Menü
+  - **Report-Feedback**: Meldet korrekte/falsche Lösungen automatisch zurück
   - Temp-Ban Erkennung
 - ✅ **Hotkeys** ⌨️ — [P] Pause, [I] Stats, [Q/ESC] Stop
 - ✅ Live-Logging in Dateien
@@ -59,48 +61,34 @@ Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
 
 ## 🔧 Installation
 
-### 1. Python installieren
-Stelle sicher, dass Python 3.8 oder höher installiert ist:
-```bash
-python --version
-```
+### 1. Dateien herunterladen
 
-### 2. Repository klonen/herunterladen
-Lade die Dateien herunter oder klone das Repository.
+Lade alle Dateien herunter und lege sie in einen gemeinsamen Ordner:
 
-### 3. Dependencies installieren
-```bash
-py -m pip install -r requirements.txt
-```
+| Datei | Beschreibung |
+|-------|-------------|
+| `CatchBot.exe` | Haupt-Bot (Einzel-Account) |
+| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (Hauptbot benötigt) |
+| `Pokemon_Names.txt` | Pokemon-Namensdatenbank |
 
-Falls Probleme auftreten, installiere die Pakete manuell:
-```bash
-py -m pip install discord.py-self colorama plyer requests aiohttp_socks
-```
 
-> **Hinweis:** `aiohttp_socks` ist optional und wird nur für SOCKS-Proxies benötigt. HTTP-Proxies funktionieren auch ohne.
+### 2. Antivirus-Hinweis
+
+Manche Antivirus-Programme melden `.exe`-Dateien die mit PyInstaller erstellt wurden als verdächtig. Das ist ein **False Positive**. Falls Windows Defender oder ein anderes Programm die Datei blockiert, füge den Ordner zur Ausnahmeliste hinzu.
 
 ---
 
 ## 🚀 Nutzung
 
 ### Einzelner Account
-```bash
-python catchbot.py
-```
-Oder doppelklicke `start_catchbot.bat`
 
-### Multi-Account
-```bash
-python launcher.py
-```
-Oder doppelklicke `start_multi-acc.bat`
+Doppelklicke `CatchBot.exe`
 
 ### Erste Einrichtung
 
 1. **Token erhalten:**
    - Öffne Discord im Browser (https://discord.com/app)
-   - Drücke `F12` bei Opera/GX `STRG+Shift+I` für Developer Tools
+   - Drücke `F12` (bei Opera/GX `STRG+Shift+I`) für Developer Tools
    - Gehe zum Tab "Network"
    - Drücke `F5` zum Neuladen
    - Suche nach "api", "science" oder "ack" in den Requests
@@ -112,14 +100,14 @@ Oder doppelklicke `start_multi-acc.bat`
    - Rechtsklick auf den Channel → "ID kopieren"
 
 3. **Bot konfigurieren:**
-   - Waehle `[3] Config` im Hauptmenue
-   - Waehle `[8]` und fuege deinen Token ein
-   - Waehle `[9]` und fuege die Channel ID ein
+   - Wähle `[3] Config` im Hauptmenü
+   - Wähle `[8]` und füge deinen Token ein
+   - Wähle `[9]` und füge die Channel ID ein
    - Konfiguriere Auto-Catch, Ball-Regeln etc.
 
 4. **Bot starten:**
    - `[1] Start` — Nur Hunting (ohne Daily Tasks)
-   - `[2] Start + Daily Tasks` — Fuehrt erst ;daily, ;h, ;swap, ;q aus, dann Hunting
+   - `[2] Start + Daily Tasks` — Führt erst ;daily, ;h, ;swap, ;q aus, dann Hunting
 
 ---
 
@@ -128,10 +116,8 @@ Oder doppelklicke `start_multi-acc.bat`
 Der Multi-Account Launcher ermöglicht es, mehrere Accounts gleichzeitig zu betreiben. Jeder Account bekommt sein eigenes Konsolenfenster und eigene Config/Stats/Logs.
 
 ### Starten
-```bash
-python launcher.py
-```
-Oder doppelklicke `start_multi-acc.bat`
+
+Doppelklicke `Catchbot-Multi-Acc-launcher.exe`
 
 ### Launcher-Menü
 
@@ -142,17 +128,20 @@ Oder doppelklicke `start_multi-acc.bat`
 | **S** | Alle bereiten Accounts gleichzeitig starten |
 | **1-9** | Einzelnen Account starten/konfigurieren |
 | **P** | Laufende Prozesse anzeigen / alle beenden |
+| **D** | Account deaktivieren / aktivieren |
 | **R** | Account aus der Liste entfernen |
 | **Q** | Beenden |
 
 ### Workflow
-1. `start_multi-acc.bat` starten
+
+1. `Catchbot-Multi-Acc-launcher.exe` starten
 2. `[A]` Account hinzufügen (Name eingeben, z.B. "main")
 3. `[K]` Token, Channel ID und **Proxy** für den Account setzen
 4. Schritte 2-3 für weitere Accounts wiederholen
 5. `[S]` Alle Accounts gleichzeitig starten
 
 ### Dateien pro Account
+
 Jeder Account bekommt eigene Dateien:
 - `config_<n>.json` — Konfiguration (inkl. Proxy)
 - `stats_<n>.json` — Persistente Statistiken
@@ -168,18 +157,20 @@ Für Multi-Account wird dringend empfohlen, **jedem Account einen eigenen Proxy*
 
 > **Wenn du einen Proxy im Bot nutzt, MUSS auch dein Browser (in dem du den Discord-Account manuell nutzt) denselben Proxy verwenden!**
 >
-> Sonst sieht Discord, dass der Account gleichzeitig oder abwechselnd von verschiedenen Standorten (z.B. Deutschland im Browser, Tokyo im Bot) aktiv ist. Das wird als "Impossible Travel" erkannt und kann zum Ban fuehren.
+> Sonst sieht Discord, dass der Account gleichzeitig oder abwechselnd von verschiedenen Standorten (z.B. Deutschland im Browser, Tokyo im Bot) aktiv ist. Das wird als "Impossible Travel" erkannt und kann zum Ban führen.
 >
 > **Regeln:**
-> - Jedes Geraet/Browser das denselben Account nutzt, muss denselben Proxy verwenden
-> - Wenn mehrere Personen den gleichen Account bottten, muessen alle denselben Proxy nutzen
-> - Deutsche Residential Proxies sind weniger auffaellig wenn man selbst in DE ist
+> - Jedes Gerät/Browser das denselben Account nutzt, muss denselben Proxy verwenden
+> - Wenn mehrere Personen den gleichen Account botten, müssen alle denselben Proxy nutzen
+> - Deutsche Residential Proxies sind weniger auffällig wenn man selbst in DE ist
 > - **Ohne Proxy ist man sicherer als mit falsch konfiguriertem Proxy!**
 
 ### Proxy setzen
+
 Config → `[Y]` → Proxy-URL eingeben
 
 ### IP-Check
+
 Config → `[Z]` prüft ob der Proxy korrekt funktioniert:
 - Zeigt deine **echte IP** (direkte Verbindung)
 - Zeigt die **Proxy-IP** (Verbindung über Proxy)
@@ -195,52 +186,43 @@ Config → `[Z]` prüft ob der Proxy korrekt funktioniert:
 | SOCKS5 | `socks5://host:port` | `socks5://proxy.example.com:1080` |
 | SOCKS5 mit Auth | `socks5://user:pass@host:port` | `socks5://myuser:mypass@proxy.example.com:1080` |
 
-### SOCKS5 Setup
-Für SOCKS5-Proxies wird die zusätzliche Dependency `aiohttp_socks` benötigt:
-```bash
-py -m pip install aiohttp_socks
-```
-HTTP-Proxies funktionieren ohne zusätzliche Pakete.
-
 ### Proxy-Anbieter Empfehlung
 - **Residential Proxies** — Sehen aus wie echte Heim-IPs, am sichersten
-- **Datacenter Proxies** — Günstiger, aber etwas auffälliger
-- **Mobile Proxies** — Sehr sicher, aber am teuersten
-
-> **Tipp:** Im Launcher wird bei jedem Account der Proxy-Status angezeigt, damit du auf einen Blick siehst welcher Account welchen Proxy nutzt.
-
-### Proxy entfernen
-Config → `[Y]` → Leer lassen und Enter drücken
+- **Datacenter Proxies** — Günstiger, aber leichter erkennbar
+- **Tipp:** Deutsche Residential Proxies wenn man selbst in DE ist
 
 ---
 
-## ⚙️ Konfiguration
+## ⚙️ Config-Übersicht
 
-Das Config-Menü ist in Unterkategorien aufgeteilt. Einige Optionen öffnen ein **eigenes Fenster** für bessere Übersicht.
+### Hauptmenü
 
-### Config-Übersicht
+| Option | Taste | Beschreibung |
+|--------|-------|-------------|
+| Start | [1] | Hunting starten (ohne Daily Tasks) |
+| Start + Daily Tasks | [2] | Dailys ausführen, dann Hunting |
+| Config | [3] | Konfigurationsmenü öffnen |
+| Logs | [4] | Log-Dateien anzeigen |
+| Update-Checker | [5] | Auf neue Version prüfen |
+| Beenden | [6] | Bot beenden |
+
+### Config-Menü
 
 | Option | Taste | Beschreibung | Standard |
-|--------|-------|--------------|----------|
-| **═══ Auto-Catch ═══** | | | |
-| Auto-Catch | [1] | Automatisches Fangen | An |
-| Ball-Regeln | [2] | Ball pro Rarity anpassen | - |
-| Fish (;f) | [3] | Fischen nach 2x ;p | Aus |
-| **═══ AutoEgg ═══** | | | |
-| AutoEgg | [E] | Egg Auto-Hatch + Hold | ❌ Aus |
-| **═══ AutoBuyer ═══** | | | |
-| AutoBuyer | [B] | Ball-Nachkauf Einstellungen → | ❌ Aus |
-| **═══ Webhook ═══** | | | |
-| Webhook | [W] | Discord Webhook Einstellungen → | ❌ Aus |
+|--------|-------|-------------|----------|
+| **═══ Hunting ═══** | | | |
+| Auto-Catch | [1] | Automatisch fangen an/aus | ✅ An |
+| Ball-Regeln | [2] | Ball pro Rarity einstellen | Standard |
+| Fish | [3] | Fischen an/aus | ❌ Aus |
+| **═══ Systeme ═══** | | | |
+| AutoBuyer | [B] | Ball-Kauf Konfiguration | ❌ Aus |
+| AutoEgg | [E] | Egg Hatch/Hold an/aus | ❌ Aus |
+| Webhook | [W] | Discord Webhook einrichten | ❌ Aus |
 | **═══ Captcha ═══** | | | |
-| Notification | [N] | Desktop-Benachrichtigung | ✅ An |
-| Sound-Alarm | [S] | Alarm-Sound bei Captcha | ❌ Aus |
-| Captcha-Service | [D] | 2Captcha / CapSolver / Manuell | Manuell |
-| Auto-Solve | [A] | Captcha automatisch lösen | ❌ Aus |
-| 2Captcha Key | [C] | 2Captcha API Key setzen | - |
-| CapSolver Key | [K] | CapSolver API Key setzen | - |
-| Max Retries | [R] | Auto-Solve Versuche (1-5) | 3 |
-| Guthaben | [G] | Captcha-Service Guthaben abfragen | - |
+| Captcha-Service | [D] | 2Captcha / Anti-Captcha / Manuell | Manuell |
+| 2Captcha Key | [C] | API Key setzen | - |
+| Anti-Captcha Key | [K] | API Key setzen | - |
+| Guthaben | [G] | Guthaben beider Services prüfen | - |
 | **═══ Auto-Release ═══** | | | |
 | Auto-Release | [X] | Duplikate releasen an/aus | ❌ Aus |
 | Intervall | [V] | Alle X Catches releasen | 50 |
@@ -277,7 +259,7 @@ Die Datei `Pokemon_Names.txt` enthält alle bekannten Pokemon-Namen. Der Bot:
 - Sucht nach Pokemon-Namen (längste zuerst: "Tapu Koko" vor "Koko", "Mewtwo" vor "Mew")
 - Zeigt den erkannten Namen im Log und in der Konsole
 
-Falls `Pokemon_Names.txt` fehlt, funktioniert der Bot trotzdem — die Namens-Erkennung ist dann nur eingeschränkt.
+> **Wichtig:** `Pokemon_Names.txt` muss im selben Ordner wie `CatchBot.exe` liegen. Falls die Datei fehlt, funktioniert der Bot trotzdem — die Namens-Erkennung ist dann nur eingeschränkt.
 
 ### 🛒 AutoBuyer System
 
@@ -354,7 +336,7 @@ Lass dir seltene Fänge auf dein Handy schicken!
 
 ### 🤖 Captcha Auto-Solve einrichten
 
-Du kannst zwischen **2Captcha** und **CapSolver** wählen. Die Erkennung ist **optimiert für PokéMeow**: Nur Zahlen, 3-8 Stellen.
+Du kannst zwischen **2Captcha** und **Anti-Captcha** wählen. Die Erkennung ist **optimiert für PokéMeow**: Nur Zahlen 1-9, 3-6 Stellen.
 
 **Option A: 2Captcha**
 1. Account auf https://2captcha.com erstellen
@@ -362,13 +344,15 @@ Du kannst zwischen **2Captcha** und **CapSolver** wählen. Die Erkennung ist **o
 3. Config → `[C]` → API Key einfügen
 4. Auto-Solve wird automatisch aktiviert
 
-**Option B: CapSolver**
-1. Account auf https://capsolver.com erstellen
-2. Config → `[D]` → "CapSolver" wählen
+**Option B: Anti-Captcha**
+1. Account auf https://anti-captcha.com erstellen
+2. Config → `[D]` → "Anti-Captcha" wählen
 3. Config → `[K]` → API Key einfügen
 4. Auto-Solve wird automatisch aktiviert
 
 **Guthaben prüfen:** Config → `[G]` zeigt das aktuelle Guthaben beider Services an (farbig: Grün >$1, Gelb >$0.20, Rot <$0.20).
+
+**Report-Feedback:** Nach jedem Captcha-Versuch meldet der Bot dem Service automatisch zurück ob die Lösung korrekt oder falsch war. Bei 2Captcha verbessert das die Worker-Qualität, bei Anti-Captcha kann eine falsche Lösung zu einer Rückerstattung führen.
 
 ### ⛔ Temp-Ban & Catch-Limit Erkennung
 
@@ -390,28 +374,27 @@ Du kannst zwischen **2Captcha** und **CapSolver** wählen. Die Erkennung ist **o
 
 | Datei | Beschreibung |
 |-------|-------------|
-| `catchbot.py` | Haupt-Bot-Datei |
-| `launcher.py` | Multi-Account Launcher |
-| `Pokemon_Names.txt` | Pokemon-Namensdatenbank |
+| `CatchBot.exe` | Haupt-Bot (Einzel-Account) |
+| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher |
+| `Pokemon_Names.txt` | Pokemon-Namensdatenbank (muss im selben Ordner liegen) |
+| `requirements.txt` | Referenz der verwendeten Libraries |
 | `config.json` | Konfiguration (wird automatisch erstellt) |
 | `config_<n>.json` | Config pro Account (Multi-Acc) |
 | `stats.json` | Persistente Statistiken |
 | `stats_<n>.json` | Stats pro Account (Multi-Acc) |
 | `launcher_config.json` | Launcher-Konfiguration (Accountliste) |
 | `logs/` | Log-Dateien pro Session |
-| `requirements.txt` | Python Dependencies |
-| `start_catchbot.bat` | Windows Starter (Einzel-Account) |
-| `start_multi-acc.bat` | Windows Starter (Multi-Account) |
 
 ---
 
 ## ⚠️ Wichtige Hinweise
 
 1. **Account-Sicherheit:** Nutze einen Alt-Account, nicht deinen Haupt-Account
-2. **Rate-Limiting:** Der Bot nutzt zufällige Intervalle, trotzdem kann Discord rate-limiting anwenden
-3. **Token-Sicherheit:** Gib deinen Token niemals weiter, pushe config.json nicht zu GitHub
+2. **Rate-Limiting:** Der Bot nutzt zufällige Intervalle, trotzdem kann Discord Rate-Limiting anwenden
+3. **Token-Sicherheit:** Gib deinen Token niemals weiter, teile `config.json` nicht mit anderen
 4. **Multi-Account:** Nutze verschiedene Proxies pro Account um Ban-Gefahr zu minimieren
 5. **Rechtliches:** Self-Bots verstoßen gegen Discord ToS, Nutzung auf eigene Verantwortung
+6. **Antivirus:** Falls die `.exe` blockiert wird, ist das ein False Positive — zur Ausnahmeliste hinzufügen
 
 ---
 
@@ -419,22 +402,22 @@ Du kannst zwischen **2Captcha** und **CapSolver** wählen. Die Erkennung ist **o
 
 | Problem | Lösung |
 |---------|--------|
+| `.exe` wird vom Antivirus blockiert | Ordner zur Ausnahmeliste hinzufügen (False Positive) |
+| Windows SmartScreen blockiert Start | "Weitere Informationen" → "Trotzdem ausführen" |
 | Login fehlgeschlagen | Token überprüfen oder neuen holen |
 | Channel nicht gefunden | Channel ID überprüfen |
-| Keine Desktop-Notification | `py -m pip install plyer` |
-| Bot wirft falschen Ball | Ball-Regeln in Config [7] prüfen |
-| Pokemon-Name nicht erkannt | `Pokemon_Names.txt` im gleichen Ordner wie `catchbot.py` ablegen |
+| Bot wirft falschen Ball | Ball-Regeln in Config [2] prüfen |
+| Pokemon-Name nicht erkannt | `Pokemon_Names.txt` im selben Ordner wie `CatchBot.exe` ablegen |
 | AutoBuyer kauft nicht | Config → [B] → aktivieren + Schwellenwerte prüfen |
 | Auto-Release geht nicht | Config → [X] → aktivieren + Intervall prüfen |
 | Webhook geht nicht | Config → [W] → URL prüfen, muss mit `https://discord.com/api/webhooks/` starten |
 | Captcha-Guthaben leer | Config → [G] → Guthaben prüfen, ggf. aufladen |
-| Stats werden nicht gespeichert | `stats.json` Schreibrechte prüfen |
-| Auto-Solve funktioniert nicht | API Key prüfen, `py -m pip install requests` |
+| Stats werden nicht gespeichert | Schreibrechte im Ordner prüfen |
+| Auto-Solve funktioniert nicht | API Key prüfen, Guthaben prüfen |
 | Bot pausiert nach Temp-Ban | Warte bis Ban abgelaufen, dann [P] drücken |
 | Bot pausiert nach Catch-Limit | Vote/Patreon oder warten, dann [P] drücken |
-| Multi-Acc startet nicht | `start_multi-acc.bat` nutzen, Python im PATH prüfen |
+| Multi-Acc startet nicht | `Catchbot-Multi-Acc-launcher.exe` nutzen |
 | Proxy funktioniert nicht | URL-Format prüfen: `http://host:port` oder `socks5://host:port` |
-| SOCKS Proxy Fehler | `py -m pip install aiohttp_socks` installieren |
 | IP-Check zeigt gleiche IPs | Proxy leitet nicht weiter, anderen Proxy/Port testen |
 | Connection Error mit Proxy | Proxy erreichbar? Credentials korrekt? |
 
@@ -446,5 +429,5 @@ Dieses Projekt dient nur zu Bildungszwecken. Die Nutzung erfolgt auf eigenes Ris
 
 ---
 
-**Version:** Beta 2.4
+**Version:** Beta 2.5
 **Erstellt von:** MyNameIsKillua
