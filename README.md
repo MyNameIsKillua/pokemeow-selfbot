@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/25418685/README.md)
 # CatchBot by MyNameIsKillua
 ## Beta Version 2.4
 
