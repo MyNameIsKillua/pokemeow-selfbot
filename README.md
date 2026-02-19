@@ -6,8 +6,11 @@ Ein Discord Self-Bot für automatisches Pokemon Hunting in PokéMeow.
 ⚠️ **WICHTIGER HINWEIS:** Self-Bots verstoßen gegen die Discord Terms of Service und können zu einem permanenten Account-Ban führen. Nutze diesen Bot auf eigene Verantwortung!
 
 **Multi-Account erhöht das Ban-Risiko deutlich, weil:**
+
 **IP-Verknüpfung:** Discord verbindet alle Accounts über deine IP - wird einer erkannt, fliegen alle gleichzeitig ("Chain-Ban").
+
 **Auffälliges Muster:** Mehrere Accounts mit identischem, automatisiertem Verhalten zur gleichen Zeit sind extrem leicht zu erkennen.
+
 **Mehr API-Traffic:** Jeder zusätzliche Account multipliziert die Anfragen und triggert Rate-Limits/Flags schneller.
 
 **Grobe Einschätzung:**
