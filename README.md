@@ -12,9 +12,8 @@
           ██████╔╝██║   ██║   ██║
           ██╔══██╗██║   ██║   ██║
           ██████╔╝╚██████╔╝   ██║
-          ╚═════╝  ╚═════╝    ╚═╝    by MyNameIsKillua
+          ╚═════╝  ╚═════╝    ╚═╝
 </pre>
-
 ### Automate your PokeMeow grind.
 
 [![Version](https://img.shields.io/badge/version-2.5_beta-blue?style=for-the-badge)]()
