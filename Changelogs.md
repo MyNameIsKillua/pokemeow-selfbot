@@ -4,12 +4,69 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-Beta_v2.5-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-19.02.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-Beta_v2.6-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-20.02.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
+
+## Beta v2.6 &mdash; 
+
+> License system migrated, update checker functional, daily task scanning fix, stability improvements.
+
+<details>
+<summary><b>License System: KeyAuth &rarr; Keygen</b></summary>
+
+&nbsp;
+
+#### Migrated from KeyAuth to Keygen.sh
+
+| Detail | Description |
+|:-------|:------------|
+| **New Provider** | [Keygen.sh](https://keygen.sh) replaces KeyAuth for license validation |
+| **HWID Lock** | License key + machine fingerprint (same hardware lock as before) |
+| **Auto-Activate** | Machine is automatically activated on first use &mdash; no manual step needed |
+| **Saved License** | License key is cached locally, auto-validated on next launch |
+| **Why** | Keygen allows 100 free licenses (KeyAuth only allowed 10) |
+
+> [!NOTE]
+> Existing users need to enter their new license key once. It will be saved automatically after that.
+
+</details>
+
+<details>
+<summary><b>Update Checker (Now Functional)</b></summary>
+
+&nbsp;
+
+#### Menu option `[5]` now checks GitHub Releases for updates
+
+| Detail | Description |
+|:-------|:------------|
+| **Source** | GitHub Releases (`MyNameIsKillua/pokemeow-selfbot`) |
+| **Comparison** | Extracts version numbers from local + remote, compares numerically |
+| **Download** | If a newer version exists, offers to open the download page in browser |
+| **No Update** | Shows confirmation + current release info |
+
+> Previously this was a placeholder that always showed "You are using the latest version".
+
+</details>
+
+<details>
+<summary><b>Bug Fixes & Stability</b></summary>
+
+&nbsp;
+
+- **Daily task scanning fix** &mdash; Bot no longer scans for shinies/legendaries during daily tasks (`;daily`, `;h`, `;swap`, `;q`). Previously the bot would detect a shiny or legendary in the daily/quest response and try to click a Masterball button on it.
+- Added `doing_dailys` guard flag &mdash; blocks `check_and_catch_pokemon` while daily tasks are running
+- Daily task wrapper uses `try/finally` to ensure the flag is always reset, even on errors
+- Guard flag reset on bot startup for clean state
+- Version bumped to **2.6** across all files (catchbot, launcher, README, changelogs)
+
+</details>
+
+---
 
 ## Beta v2.5 &mdash; 
 
