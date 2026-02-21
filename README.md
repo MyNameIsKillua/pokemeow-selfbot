@@ -1,497 +1,553 @@
 <div align="center">
 
-<pre>
- ██████╗ █████╗ ████████╗ ██████╗██╗  ██╗
-██╔════╝██╔══██╗╚══██╔══╝██╔════╝██║  ██║
-██║     ███████║   ██║   ██║     ███████║
-██║     ██╔══██║   ██║   ██║     ██╔══██║
-╚██████╗██║  ██║   ██║   ╚██████╗██║  ██║
- ╚═════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝
-          ██████╗  ██████╗ ████████╗
-          ██╔══██╗██╔═══██╗╚══██╔══╝
-          ██████╔╝██║   ██║   ██║
-          ██╔══██╗██║   ██║   ██║
-          ██████╔╝╚██████╔╝   ██║
-          ╚═════╝  ╚═════╝    ╚═╝
-</pre>
+# Changelog
 
-### Automate your PokeMeow grind.
+**All notable changes to CatchBot are documented here.**
 
-[![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)]()
-[![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
-[![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
-[![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
-
-**Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
-
-[Features](#-features) &bull; [Installation](#-installation) &bull; [Usage](#-usage) &bull; [Multi-Account](#-multi-account-launcher) &bull; [Config](#%EF%B8%8F-config-overview) &bull; [Troubleshooting](#-troubleshooting)
+[![Current Version](https://img.shields.io/badge/Latest-v3.0-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-21.02.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
 
-> [!CAUTION]
-> **Self-Bots violate the Discord Terms of Service** and may result in a **permanent account ban**. Use at your own risk. Always use an alt account.
->
-> **Multi-Account significantly increases the ban risk because:**
->
-> | Factor | Why it matters |
-> |:-------|:---------------|
-> | **IP Linking** | Discord connects all accounts via your IP -- if one is detected, all get banned simultaneously ("Chain-Ban"). |
-> | **Suspicious Patterns** | Multiple accounts with identical, automated behavior at the same time are extremely easy to detect. |
-> | **More API Traffic** | Each additional account multiplies the requests and triggers rate limits/flags faster. |
->
-> | Setup | Relative Risk |
-> |:------|:--------------|
-> | 1 Account, careful | Baseline |
-> | 2-3 Accounts, same IP | ~2-3x higher |
-> | 5+ Accounts, same IP | Significantly higher |
-> | Many Accounts, no Proxy/Cooldown | Very high |
+## v3.0 &mdash; Official Release
 
-<br>
+> First official release! Desktop notifications fixed, softer alarm sounds, AutoQuestRenewer, egg hatch tracking, shiny/legendary highlights everywhere.
 
-## ⚡ Features
+<details>
+<summary><b>Desktop Notifications (Fixed)</b></summary>
 
-<table>
-<tr>
-<td width="50%">
+&nbsp;
 
-**Catching & Hunting**
-- Auto-catch based on rarity detection
-- Smart ball selection (Pokeball to Masterball)
-- Pokemon name recognition via `Pokemon_Names.txt`
-- Semi-automatic fishing (`;f`)
-- Auto daily tasks (`;daily`, `;h`, `;swap`, `;q`)
-- Colored console output per rarity
+- Replaced `plyer` (which broke in compiled .exe builds) with native Windows toast notifications via PowerShell
+- Works reliably in Nuitka .exe builds -- no external Python packages needed
 
-</td>
-<td width="50%">
+</details>
 
-**Automation Systems**
-- AutoEgg &mdash; hatch + hold on startup & during hunting, egg stats tracking
-- AutoBuyer &mdash; monitor & restock ball inventory
-- AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
-- Auto-Release &mdash; release duplicates (keeps Legendary & Shiny)
-- Daily catch limit detection & pause
-- Discord webhook notifications for Shinys and Legendarys
+<details>
+<summary><b>Alarm Sound Rework</b></summary>
 
-</td>
-</tr>
-<tr>
-<td width="50%">
+&nbsp;
 
-**Multi-Account & Security**
-- Run multiple accounts in separate console windows
-- Central launcher with account management
-- HTTP/HTTPS & SOCKS5 proxy support per account
-- Built-in IP check (real IP vs proxy IP)
+- Replaced harsh `winsound.Beep()` with a custom WAV generator using smooth sine-wave tones with fade-in/fade-out
+- New config option: **Alarm Volume** (0-100%, default 50%) -- adjustable in config menu
+- Plays a test tone when changing volume so you hear the result immediately
+- Even at 100% the volume is capped so it won't destroy your ears
 
-</td>
-<td width="50%">
+</details>
 
-**Captcha & Monitoring**
-- 2Captcha + Anti-Captcha auto-solve
-- Balance check in config menu
-- Report feedback (correct/incorrect solutions)
-- Temp-ban detection & recovery
-- Configurable alarm volume (soft tones, no more ear-destroying beeps)
-- Session stats, all-time tracking (incl. egg hatch stats), live logging
+<details>
+<summary><b>AutoQuestRenewer (New)</b></summary>
 
-</td>
-</tr>
-</table>
+&nbsp;
 
-<br>
+Automatically renews unwanted quests after `;q` during Daily Tasks.
 
-## 📥 Installation
+| Config Key | What it filters |
+|:-----------|:----------------|
+| `[1]` | Toggle on/off |
+| `[2]` | Battle Quests ("Defeat", "Battle") |
+| `[3]` | Fish Quests ("Pokemon from Fishing", "Fish") |
+| `[4]` | Receive from Player ("from another player") |
+| `[5]` | Catch Quests ("Encounter", "Catch") |
 
-### 1. Download Files
+- Parses quest embed, matches keywords, sends `;q r {number}` automatically
+- Stops when no quest scrolls are left ("You don't have any quest reset scrolls!")
+- Re-scans the `;q r` response and renews again if the replacement quest also matches
+- 6-second cooldown between each renewal command
 
-| File | Description |
-|:-----|:------------|
-| `CatchBot.exe` | Main bot (single account) |
-| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (required Main Bot) |
-| `Pokemon_Names.txt` | Pokemon name database |
+</details>
 
-Download all files and place them in a **shared folder**.
+<details>
+<summary><b>Shiny & Legendary Highlights</b></summary>
 
-### 2. Antivirus Notice
+&nbsp;
+
+- **Console logs**: Shiny catches print as `**Shiny (Pokemon)**` with a highlighted magenta banner
+- **Shiny egg hatches**: Print as `**Shiny (Pokemon)**!` with the same highlight
+- **Private webhook** (your config webhook): Shiny catches get a gold embed color, Legendaries get purple, plus a header line so you never miss them
+- **Shared webhook** (`#successful-catches`): Same gold/purple embed color for Shiny/Legendary catches and Shiny egg hatches
+
+</details>
+
+<details>
+<summary><b>Egg Hatch Tracking</b></summary>
+
+&nbsp;
+
+- Hatched Pokemon name now extracted and shown in both console and log file
+- EXP/level-up lines are filtered out to prevent false name matches (e.g. Buddy name instead of hatched Pokemon)
+- Egg hatches sent to both shared and private webhooks
+- **Egg stats in `stats.json`**: Total eggs hatched, full hatch history (name + date + shiny), rarity breakdown (Normal vs Shiny)
+- Session and all-time egg stats shown in `[I]` statistics view
+
+</details>
+
+<details>
+<summary><b>Egg Startup Logic Improved</b></summary>
+
+&nbsp;
+
+- Bot now reads PokeMeow's response before deciding what to do
+- If egg is "not ready to hatch yet", it knows an egg is already held and skips `;egg hold`
+- Only sends `;egg hold` when no egg is held or after a successful hatch
+- 3-second delay before egg check to avoid rapid command rejection
+
+</details>
+
+<details>
+<summary><b>Other Changes</b></summary>
+
+&nbsp;
+
+- Version bumped from Beta 2.6 to **v3.0** (official release, no longer beta)
+- Quest parser now strips markdown formatting (`**`, `__`, `*`) before matching
+- Quest parser no longer creates phantom quests from reward/progress lines
+
+</details>
+
+---
+
+## Beta v2.6 &mdash; 
+
+> update checker functional, daily task scanning fix, stability improvements.
+
+<details>
+<summary><b>Update Checker (Now Functional)</b></summary>
+
+&nbsp;
+
+#### Menu option `[5]` now checks GitHub Releases for updates
+
+| Detail | Description |
+|:-------|:------------|
+| **Source** | GitHub Releases (`MyNameIsKillua/pokemeow-selfbot`) |
+| **Comparison** | Extracts version numbers from local + remote, compares numerically |
+| **Download** | If a newer version exists, offers to open the download page in browser |
+| **No Update** | Shows confirmation + current release info |
+
+> Previously this was a placeholder that always showed "You are using the latest version".
+
+</details>
+
+<details>
+<summary><b>Bug Fixes & Stability</b></summary>
+
+&nbsp;
+
+- **Daily task scanning fix** &mdash; Bot no longer scans for shinies/legendaries during daily tasks (`;daily`, `;h`, `;swap`, `;q`). Previously the bot would detect a shiny or legendary in the daily/quest response and try to click a Masterball button on it.
+- Added `doing_dailys` guard flag &mdash; blocks `check_and_catch_pokemon` while daily tasks are running
+- Daily task wrapper uses `try/finally` to ensure the flag is always reset, even on errors
+- Guard flag reset on bot startup for clean state
+- Version bumped to **2.6** across all files (catchbot, launcher, README, changelogs)
+
+</details>
+
+---
+
+## Beta v2.5 &mdash; 
+
+> Captcha system overhaul &mdash; CapSolver removed, Anti-Captcha added, report feedback for both services.
+
+<details>
+<summary><b>Captcha System Reworked</b></summary>
+
+&nbsp;
+
+#### CapSolver removed, Anti-Captcha added
+
+| Detail | Description |
+|:-------|:------------|
+| **New Service** | [Anti-Captcha](https://anti-captcha.com) replaces CapSolver as the second captcha option |
+| **API Endpoints** | `createTask`, `getTaskResult`, `getBalance`, `reportIncorrectImageCaptcha` |
+| **Config `[D]`** | Select service: 2Captcha / Anti-Captcha / Manual |
+| **Config `[K]`** | Set Anti-Captcha API key (was previously CapSolver) |
+| **Balance `[G]`** | Now shows 2Captcha + Anti-Captcha balance |
+| **Migration** | Old `capsolver_api_key` entries are automatically removed |
+
+#### Report Feedback (New)
+
+Reports are sent automatically when PokeMeow responds:
+- `"thank you"` = correct &rarr; `reportCorrect`
+- `"incorrect"` = wrong &rarr; `reportIncorrect` / `reportIncorrectImageCaptcha`
+
+| Service | Feedback |
+|:--------|:---------|
+| **2Captcha** | `reportCorrect` + `reportIncorrect` |
+| **Anti-Captcha** | `reportIncorrectImageCaptcha` (refund within 60s) |
 
 > [!NOTE]
-> Some antivirus programs flag `.exe` files created with PyInstaller as suspicious. This is a **False Positive**.
-> If Windows Defender or another program blocks the file, add the folder to the exception list.
+> Reports improve solution quality over time &mdash; services use them to optimize their workers.
 
-<br>
+#### Captcha Numbers Optimized
 
-## 🚀 Usage
+```
+minLength:   3      (was 3)
+maxLength:   6      (was 8 -- PokeMeow only uses 3-6 digits)
+numeric:     1      (numbers only, 1-9)
+comment:     improved description for better recognition
+```
 
-### Quick Start (Single Account)
-
-1. Double-click `CatchBot.exe`
-2. Select `[3] Config` to set up your token and channel
-3. Select `[1] Start` or `[2] Start + Daily Tasks`
+</details>
 
 <details>
-<summary><b>How to get your Discord Token</b></summary>
+<summary><b>Other Changes</b></summary>
 
-<br>
+&nbsp;
 
-1. Open Discord in your browser &mdash; https://discord.com/app
-2. Press `F12` (on Opera/GX: `CTRL+Shift+I`) for Developer Tools
-3. Go to the **Network** tab
-4. Press `F5` to reload
-5. Search for `api`, `science` or `ack` in the requests
-6. Find the **Authorization** header &mdash; that is your token
+- Version bumped to **2.5**
+- Config migration: `capsolver_api_key` automatically removed, service reset to `"Manual"` if CapSolver was active
+
+</details>
+
+---
+
+## Beta v2.4 &mdash;
+
+> Start menu reworked, config simplified, proxy safety warning.
+
+<details>
+<summary><b>New Features</b></summary>
+
+&nbsp;
+
+#### Start Menu Reworked
+
+| Option | Action |
+|:-------|:-------|
+| `[1] Start` | Hunting + auto-catch only |
+| `[2] Start + Daily Tasks` | Runs all dailies first (`;daily`, `;h`, `;swap`, `;q`), then hunting |
+
+- Daily tasks are no longer individually toggleable in config &mdash; decided at startup
+- Fewer clicks, faster workflow
+
+#### Config Menu Simplified
+
+| Key | Function |
+|:----|:---------|
+| `[1]` | Auto-Catch |
+| `[2]` | Ball Rules |
+| `[3]` | Fish |
+
+- Daily task toggles `[1]-[4]` removed &mdash; now controlled via start menu
+
+</details>
+
+<details>
+<summary><b>Proxy Warning</b></summary>
+
+&nbsp;
 
 > [!WARNING]
-> **Never share your token with anyone!**
+> **Only use a proxy if browser + bot use the same proxy!**
+>
+> If the bot runs through a proxy in Tokyo, but your browser uses your real IP in Germany, Discord sees IP jumps between continents &mdash; **this is a ban risk!**
+>
+> - Every device and browser on the same account must use the **same proxy**
+> - **Exception:** Residential proxies from your own country are less suspicious
+> - **No proxy is safer than a misconfigured proxy**
 
 </details>
 
 <details>
-<summary><b>How to get your Channel ID</b></summary>
+<summary><b>Other Changes</b></summary>
 
-<br>
+&nbsp;
 
-1. Enable Developer Mode in Discord &mdash; Settings > Advanced > Developer Mode
-2. Right-click on the channel > **Copy ID**
+- Main menu rearranged: Config=`[3]`, Logs=`[4]`, Update Checker=`[5]`, Exit=`[6]`
+- Version bumped to **2.4**
 
 </details>
+
+---
+
+## Beta v2.3 &mdash; 
+
+> Proxy support and IP check for multi-account safety.
 
 <details>
-<summary><b>First-Time Configuration</b></summary>
+<summary><b>New Features</b></summary>
 
-<br>
+&nbsp;
 
-1. Select `[3] Config` in the main menu
-2. Select `[8]` and paste your token
-3. Select `[9]` and paste the channel ID
-4. Configure auto-catch, ball rules, etc.
+#### Proxy Support
 
-</details>
-
-### Main Menu
-
-| Key | Function |
-|:---:|:---------|
-| `1` | Start hunting (without daily tasks) |
-| `2` | Start + Daily Tasks (`;daily`, `;h`, `;swap`, `;q` first) |
-| `3` | Open configuration menu |
-| `4` | View log files |
-| `5` | Check for updates |
-| `6` | Exit |
-
-### Hotkeys (while running)
-
-| Key | Function |
-|:---:|:---------|
-| `P` | Pause / Resume / Lift Temp-Ban / Catch Limit |
-| `I` | Show session statistics |
-| `Q` / `ESC` | Return to main menu |
-
-<br>
-
-## 👥 Multi-Account Launcher
-
-Run multiple accounts simultaneously, each in its own console window with separate config, stats, and logs.
-
-### Launcher Controls
-
-| Key | Function |
-|:---:|:---------|
-| `A` | Add new account (e.g. "main", "alt1", "alt2") |
-| `K` | Configure account (opens CatchBot config) |
-| `S` | Start all ready accounts |
-| `1-9` | Start/configure individual account |
-| `P` | Show running processes / terminate all |
-| `D` | Disable / enable account |
-| `R` | Remove account from list |
-| `Q` | Exit launcher |
-
-### Workflow
-
-```
-1. Start  Catchbot-Multi-Acc-launcher.exe
-2. [A]    Add account (enter a name, e.g. "main")
-3. [K]    Set token, channel ID, and proxy
-4.        Repeat 2-3 for additional accounts
-5. [S]    Start all accounts
-```
-
-Each account gets its own files:
-```
-config_<name>.json    # Configuration (incl. proxy)
-stats_<name>.json     # Persistent statistics
-logs/<name>/          # Log files
-```
-
-<br>
-
-## 🌐 Proxy Support
+| Feature | Detail |
+|:--------|:-------|
+| **Protocols** | HTTP / HTTPS / SOCKS5 |
+| **Config `[Y]`** | Set proxy URL (`http://host:port` or `socks5://user:pass@host:port`) |
+| **Auth** | Username + password supported |
+| **Launcher** | Proxy status shown per account: `[HTTP: host:port]` / `[No Proxy]` |
+| **SOCKS5** | Via optional `aiohttp_socks` dependency |
 
 > [!IMPORTANT]
-> For multi-account usage, it is **strongly recommended** to assign each account its own proxy so Discord does not see multiple accounts from the same IP.
+> **Recommended for multi-acc:** Each account with its own IP significantly reduces ban risk.
 
-<details>
-<summary><b>Why proxies matter</b></summary>
+#### IP Check
 
-<br>
-
-If you use a proxy in the bot, your browser (where you manually use the Discord account) **must also use the same proxy**. Otherwise, Discord sees the account active from different locations simultaneously (e.g. Germany in browser, Tokyo in bot) &mdash; this is detected as "Impossible Travel" and can lead to a ban.
-
-**Rules:**
-- Every device/browser using the same account must use the same proxy
-- If multiple people are botting the same account, they must all use the same proxy
-- Residential proxies from your own country are less suspicious
-- **No proxy is safer than a misconfigured proxy!**
+- Config `[Z]` &mdash; shows real IP vs. proxy IP
+- Automatically compares both: **Different = Proxy working**
+- Warning if IPs are identical (proxy not forwarding)
+- Fallback chain: `ipify` &rarr; `icanhazip` &rarr; `checkip.amazonaws`
+- Works with HTTP and SOCKS5
 
 </details>
 
-### Supported Formats
+<details>
+<summary><b>Other Changes</b></summary>
+
+&nbsp;
+
+- `requirements.txt` extended with `aiohttp_socks` (optional)
+- Config menu extended: `[Y]` Proxy, `[Z]` IP Check
+- Proxy info displayed in config overview under Token/Channel
+
+</details>
+
+---
+
+## Beta v2.2 &mdash; 
+
+> Multi-account launcher, auto-release duplicates, balance check, Pokemon name recognition.
+
+<details>
+<summary><b>New Features</b></summary>
+
+&nbsp;
+
+#### Multi-Account Launcher
 
 ```
-http://host:port                    # HTTP
-http://user:pass@host:port          # HTTP with Auth
-socks5://host:port                  # SOCKS5
-socks5://user:pass@host:port        # SOCKS5 with Auth
+[A]   Add account (e.g. "main", "alt1", "alt2")
+[K]   Configure account (opens CatchBot config menu)
+[S]   Start all ready accounts simultaneously
+[1-9] Start or configure individual account
+[P]   Show running processes / terminate all
+[R]   Remove account from list
 ```
 
-- Set proxy: Config > `[Y]`
-- IP Check:  Config > `[Z]` &mdash; compares your real IP vs proxy IP
+- Each account gets its own files: `config_<name>.json`, `stats_<name>.json`, `logs/<name>/`
+- Automatically checks if token + channel ID are set
 
-> **Tip:** Use **residential proxies** from your own country for the safest option.
+#### Auto-Release Duplicates
 
-### Multi-Account Risk Assessment
+| Setting | Detail |
+|:--------|:-------|
+| **Command** | `;release duplicates` |
+| **Keeps** | Legendary + Shiny automatically |
+| **Interval** | Configurable (default: every 50 catches) |
+| **Config** | `[X]` on/off, `[V]` set interval |
 
-| Setup | Risk Level |
-|:------|:-----------|
-| 1 Account, careful | Baseline |
-| 2-3 Accounts, same IP | ~2-3x higher |
-| 5+ Accounts, same IP | Significantly higher |
-| Many Accounts, no Proxy | Very high |
+#### Captcha Balance Check
 
-<br>
+Config `[G]` &mdash; shows current balance of both services:
 
-## ⚙️ Config Overview
+| Balance | Color |
+|:--------|:------|
+| > $1.00 | Green |
+| > $0.20 | Yellow |
+| < $0.20 | Red |
 
-<details>
-<summary><b>Full Config Menu Reference</b></summary>
+#### Pokemon Name Recognition
 
-<br>
-
-| Option | Key | Description | Default |
-|:-------|:---:|:------------|:--------|
-| | | **=== Hunting ===** | |
-| Auto-Catch | `1` | Toggle automatic catching | On |
-| Ball Rules | `2` | Set ball per rarity | Default |
-| Fish | `3` | Toggle fishing | Off |
-| | | **=== Systems ===** | |
-| AutoBuyer | `B` | Ball purchase config | Off |
-| AutoEgg | `E` | Toggle egg hatch/hold | Off |
-| AutoQuestRenewer | `Q` | Auto-renew unwanted quests | Off |
-| Webhook | `W` | Discord webhook setup | Off |
-| Alarm Volume | `L` | Alarm volume (0-100%) | 50% |
-| | | **=== Captcha ===** | |
-| Captcha Service | `D` | 2Captcha / Anti-Captcha / Manual | Manual |
-| 2Captcha Key | `C` | Set API key | - |
-| Anti-Captcha Key | `K` | Set API key | - |
-| Balance | `G` | Check balance of both services | - |
-| | | **=== Auto-Release ===** | |
-| Auto-Release | `X` | Toggle duplicate release | Off |
-| Interval | `V` | Release every X catches | 50 |
-| | | **=== Settings ===** | |
-| Token | `8` | Set Discord token | - |
-| Channel ID | `9` | Set channel ID | - |
-| Proxy | `Y` | Set proxy URL | - |
-| IP Check | `Z` | Check real vs proxy IP | - |
-
-</details>
-
-### Ball Rules & Rarity Colors
-
-| Rarity | Ball | Button | Console Color |
-|:-------|:-----|:-------|:--------------|
-| Common | Pokeball | 1st (far left) | Blue |
-| Uncommon | Pokeball | 1st (far left) | Blue |
-| Rare | Greatball | 2nd | Orange/Yellow |
-| Super Rare | Ultraball | 3rd | Light Yellow |
-| Legendary | Masterball | 5th (far right) | Purple |
-| Shiny | Masterball | 5th (far right) | Pink |
-
-**Example output:**
-```
-[23:49:57] UNCOMMON  (Wingull)  > Pokeball clicked! (Button 0)  Caught
-[23:50:12] RARE      (Eevee)    > Greatball clicked! (Button 1)  Fled
-[23:50:45] LEGENDARY (Mewtwo)   > Masterball clicked! (Button 4) Caught
-```
-
-<details>
-<summary><b>AutoBuyer Configuration</b></summary>
-
-<br>
-
-Open with Config > `[B]`
-
-| Key | Function |
-|:---:|:---------|
-| `1` | Enable/disable AutoBuyer |
-| `2` | Pokeball threshold + amount |
-| `3` | Greatball threshold + amount |
-| `4` | Ultraball threshold + amount |
-| `5` | Masterball threshold + amount |
-| `6` | Reset to defaults |
-
-**Defaults:**
-
-| Ball | Buy when &le; | Amount | Command |
-|:-----|:-------------|:-------|:--------|
-| Pokeball | 10 | 200x | `;shop buy pb 200` |
-| Greatball | 10 | 100x | `;shop buy gb 100` |
-| Ultraball | 10 | 25x | `;shop buy ub 25` |
-| Masterball | 1 | 1x | `;shop buy mb 1` |
-
-</details>
-
-<details>
-<summary><b>Webhook Configuration</b></summary>
-
-<br>
-
-Get rare catches sent straight to your phone!
-
-**Setup:**
-1. Create a webhook &mdash; Channel > Edit > Integrations > Webhooks > New Webhook
-2. Config > `[W]` > `[2]` > Paste webhook URL
-3. Config > `[W]` > `[1]` > Enable
-
-| Key | Reports |
-|:---:|:--------|
-| `1` | Enable/disable webhook |
-| `2` | Set webhook URL |
-| `3` | Common catches |
-| `4` | Uncommon catches |
-| `5` | Rare catches |
-| `6` | Super Rare catches |
-| `7` | Legendary catches (default: on) |
-| `8` | Shiny catches (default: on) |
-| `9` | Also report when fled |
-| `L` | Catch limit warning |
-
-</details>
-
-<details>
-<summary><b>Captcha Auto-Solve Setup</b></summary>
-
-<br>
-
-Detection is optimized for PokeMeow: numbers only 1-9, 3-6 digits.
-
-**Option A: 2Captcha**
-1. Create an account at https://2captcha.com
-2. Config > `[D]` > Select "2Captcha"
-3. Config > `[C]` > Paste API key
-
-**Option B: Anti-Captcha**
-1. Create an account at https://anti-captcha.com
-2. Config > `[D]` > Select "Anti-Captcha"
-3. Config > `[K]` > Paste API key
-
-Check balance: Config > `[G]` &mdash; color-coded: Green >&dollar;1, Yellow >&dollar;0.20, Red <&dollar;0.20
-
-After each captcha attempt, the bot automatically reports whether the solution was correct or incorrect. With 2Captcha this improves worker quality; with Anti-Captcha an incorrect solution can lead to a refund.
-
-</details>
-
-<details>
-<summary><b>Session Statistics & Tracking</b></summary>
-
-<br>
-
-Press `[I]` while the bot is running to view current stats. On exit, they are displayed automatically.
-
-**Session Stats (per bot start):**
-- Encounters, Caught, Fled, Catch Rate %
-- Catch rate broken down by rarity
-- Best catches (Shiny, Legendary, Super Rare)
-- Session duration
-
-**All-Time Stats (persistent in `stats.json`):**
-- Total caught/fled across all sessions
-- Shinies caught (with name + date)
-- Legendaries caught (with name + date)
-- Eggs hatched (total count, Pokemon list, shiny/normal breakdown)
-- Number of sessions
-
-</details>
-
-<br>
-
-## 📁 File Structure
+- Names displayed in log + console via `Pokemon_Names.txt` database
+- Cleans Discord markdown and emojis automatically
+- Recognizes multi-part names (Tapu Koko, Mr. Mime, Iron Hands, etc.)
 
 ```
-CatchBot/
-├── CatchBot.exe                     # Main bot
-├── Catchbot-Multi-Acc-launcher.exe  # Multi-Account Launcher
-├── Pokemon_Names.txt                # Pokemon name database
-├── config.json                      # Configuration (auto-created)
-├── config_<name>.json               # Per-account config (multi-acc)
-├── stats.json                       # Persistent statistics
-├── stats_<name>.json                # Per-account stats (multi-acc)
-├── launcher_config.json             # Launcher account list
-└── logs/                            # Log files per session
-    └── <name>/
+[23:49:57] UNCOMMON (Wingull) > Pokeball clicked! (Button 0) Caught
 ```
-
-<br>
-
-## 🔧 Troubleshooting
-
-<details>
-<summary><b>Click to expand full troubleshooting table</b></summary>
-
-<br>
-
-| Problem | Solution |
-|:--------|:---------|
-| `.exe` blocked by antivirus | Add folder to exception list (False Positive) |
-| Windows SmartScreen blocks launch | "More info" > "Run anyway" |
-| Login failed | Check token or get a new one |
-| Channel not found | Check channel ID |
-| Bot throws wrong ball | Check ball rules in Config `[2]` |
-| Pokemon name not recognized | Place `Pokemon_Names.txt` in the same folder as `CatchBot.exe` |
-| AutoBuyer not buying | Config > `[B]` > Enable + check thresholds |
-| Auto-Release not working | Config > `[X]` > Enable + check interval |
-| Webhook not working | Check URL starts with `https://discord.com/api/webhooks/` |
-| Captcha balance empty | Config > `[G]` > Top up if needed |
-| Stats not saving | Check write permissions in the folder |
-| Auto-Solve not working | Check API key and balance |
-| Bot pauses after temp-ban | Wait until ban expires, then press `[P]` |
-| Bot pauses after catch limit | Vote/Patreon or wait, then press `[P]` |
-| Multi-Acc not starting | Use `Catchbot-Multi-Acc-launcher.exe` |
-| Proxy not working | Check format: `http://host:port` or `socks5://host:port` |
-| IP Check shows same IPs | Proxy is not forwarding, try a different proxy/port |
-| Connection error with proxy | Is the proxy reachable? Are credentials correct? |
 
 </details>
 
-<br>
+<details>
+<summary><b>Bug Fixes & Stability</b></summary>
 
-## ⚠️ Important Notes
+&nbsp;
 
-- **Account Safety** &mdash; Use an alt account, not your main
-- **Token Safety** &mdash; Never share your token or `config.json`
-- **Multi-Account** &mdash; Use different proxies per account to minimize ban risk
-- **Rate Limiting** &mdash; The bot uses random intervals, but Discord may still rate limit
-- **Antivirus** &mdash; `.exe` flagged as virus is a False Positive, add to exception list
+- Various bug fixes and stability improvements
+- Auto-Catch guard logging for better debugging
+- Main loop now pauses during auto-release
+- Multi-Account support: `--account` argument for separate configs
 
-<br>
+</details>
+
+---
+
+## Beta v2.1 &mdash; 
+
+> Catch limit detection, result tracking, session stats, and Discord webhooks.
+
+<details>
+<summary><b>New Features</b></summary>
+
+&nbsp;
+
+#### Daily Catch Limit Detection
+
+- Detects `"you have reached the daily catch limit"` automatically
+- Bot pauses completely + red warning + alarm + webhook alert
+- Resume with `[P]` after limit resets
+
+#### Catch Result Detection
+
+Clean single-line log with result appended:
+
+```
+[23:49:57] UNCOMMON > Pokeball clicked! (Button 0) Caught
+[23:50:12] RARE     > Greatball clicked! (Button 1) Fled
+```
+
+Waits up to 8 seconds for PokeMeow response.
+
+#### Session Statistics & Tracking
+
+| Feature | Detail |
+|:--------|:-------|
+| **Hotkey `[I]`** | Live session summary at any time |
+| **Tracked** | Total caught/fled, catch rate %, rate per rarity, duration, best catches |
+| **Counters** | Shiny + Legendary (session + all-time) |
+| **Persistent** | Saved in `stats.json` |
+
+#### Discord Webhook Notifications
+
+- Send catch results to a Discord webhook
+- Configurable which rarities are reported
+- Catch limit warning via webhook
+- Dedicated config window: Config `[W]`
+
+</details>
+
+<details>
+<summary><b>Bug Fixes</b></summary>
+
+&nbsp;
+
+- AutoBuyer fix: 5s cooldown after purchase
+- AutoBuyer also triggers on `on_message_edit`
+
+</details>
+
+---
+
+## Beta v2.0 &mdash; 
+
+> AutoEgg, captcha auto-solve, temp-ban detection, colored messages, AutoBuyer.
+
+<details>
+<summary><b>New Features</b></summary>
+
+&nbsp;
+
+#### AutoEgg System
+
+- Automatic egg hatch + hold on bot startup
+- Detects `"egg is ready to hatch"` during hunting
+- Config `[E]` to toggle
+
+#### Captcha Auto-Solve
+
+| Setting | Value |
+|:--------|:------|
+| **Services** | 2Captcha + CapSolver |
+| **Optimized** | Numbers only (`numeric=1`), 3-8 digits |
+| **Retries** | Configurable 1-5 attempts |
+
+#### Temp-Ban Detection
+
+- Bot pauses completely + warning + alarm
+- Resume with `[P]` after ban expires
+
+#### Colored Catch Messages
+
+| Rarity | Color |
+|:-------|:------|
+| Common / Uncommon | Blue |
+| Rare | Orange / Yellow |
+| Super Rare | Light Yellow |
+| Legendary | Purple |
+| Shiny | Pink |
+
+#### AutoBuyer System
+
+- Monitors ball inventory after each catch
+- Dedicated config window: Config `[B]`
+
+</details>
+
+<details>
+<summary><b>Bug Fixes</b></summary>
+
+&nbsp;
+
+- Lootbox emoji false positives fixed
+- Egg startup improved
+- Captcha retry + numeric fix
+- Deprecated asyncio fix, code cleanup
+
+</details>
+
+---
+
+## Beta v1.9 &mdash; 
+
+> Captcha detection with auto-pause, alarm system, hotkeys.
+
+<details>
+<summary><b>Features</b></summary>
+
+&nbsp;
+
+- Captcha detection with auto-pause
+- Captcha alarm: Desktop notification + sound
+- Captcha auto-resume on edited messages
+- Hotkeys: `[P]` Pause/Resume, `[Q/ESC]` Back
+
+</details>
+
+---
+
+## Beta v1.8
+
+> Core auto-catch system, ball rules, logging, daily tasks.
+
+<details>
+<summary><b>Features</b></summary>
+
+&nbsp;
+
+- Auto-Catch with rarity detection (button click)
+- Configurable ball rules
+- Live logging in `logs/` folder
+- Daily tasks: `;daily`, `;h`, `;swap`, `;q`
+- Hunting loop with random intervals (11-15s)
+- Optional fishing (`;f`)
+
+</details>
+
+---
+
+## Beta v1.3
+
+> Initial release.
+
+<details>
+<summary><b>Features</b></summary>
+
+&nbsp;
+
+- Automatic daily tasks
+- Automatic Pokemon hunting
+- Auto-Catch based on rarity (text commands)
+- Basic logging system
+
+</details>
 
 ---
 
 <div align="center">
 
-**v3.0** &mdash; Created by **MyNameIsKillua**
-
-[![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
+<sub>CatchBot by MyNameIsKillua</sub>
 
 </div>
