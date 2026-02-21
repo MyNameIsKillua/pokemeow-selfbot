@@ -17,7 +17,7 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-2.6_beta-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
@@ -68,11 +68,12 @@
 <td width="50%">
 
 **Automation Systems**
-- AutoEgg &mdash; hatch + hold on startup & during hunting
+- AutoEgg &mdash; hatch + hold on startup & during hunting, egg stats tracking
 - AutoBuyer &mdash; monitor & restock ball inventory
+- AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
 - Auto-Release &mdash; release duplicates (keeps Legendary & Shiny)
 - Daily catch limit detection & pause
-- Discord webhook notifications for rare catches
+- Discord webhook notifications for Shinys and Legendarys
 
 </td>
 </tr>
@@ -93,7 +94,8 @@
 - Balance check in config menu
 - Report feedback (correct/incorrect solutions)
 - Temp-ban detection & recovery
-- Session stats, all-time tracking, live logging
+- Configurable alarm volume (soft tones, no more ear-destroying beeps)
+- Session stats, all-time tracking (incl. egg hatch stats), live logging
 
 </td>
 </tr>
@@ -286,7 +288,9 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | | | **=== Systems ===** | |
 | AutoBuyer | `B` | Ball purchase config | Off |
 | AutoEgg | `E` | Toggle egg hatch/hold | Off |
+| AutoQuestRenewer | `Q` | Auto-renew unwanted quests | Off |
 | Webhook | `W` | Discord webhook setup | Off |
+| Alarm Volume | `L` | Alarm volume (0-100%) | 50% |
 | | | **=== Captcha ===** | |
 | Captcha Service | `D` | 2Captcha / Anti-Captcha / Manual | Manual |
 | 2Captcha Key | `C` | Set API key | - |
@@ -415,6 +419,7 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 - Total caught/fled across all sessions
 - Shinies caught (with name + date)
 - Legendaries caught (with name + date)
+- Eggs hatched (total count, Pokemon list, shiny/normal breakdown)
 - Number of sessions
 
 </details>
@@ -485,7 +490,7 @@ CatchBot/
 
 <div align="center">
 
-**Beta 2.6** &mdash; Created by **MyNameIsKillua**
+**v3.0** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
