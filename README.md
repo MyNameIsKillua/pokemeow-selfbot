@@ -17,12 +17,11 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-3.1-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-4.0-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
+[![YouTube Preview](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
-
-Youtube: https://youtu.be/Xq1AWC1P8i0
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
@@ -63,7 +62,7 @@ Youtube: https://youtu.be/Xq1AWC1P8i0
 - Smart ball selection (Pokeball to Masterball)
 - Event Pokemon detection (red embed) &mdash; auto Premierball / Masterball
 - Pokemon name recognition via `Pokemon_Names.txt`
-- Semi-automatic fishing (`;f`)
+- Full auto fishing (`;f`) &mdash; requires MeowHelper Bot for rarity detection
 - Auto daily tasks (`;daily`, `;h`, `;swap`, `;q`)
 - Colored console output per rarity
 
@@ -75,7 +74,7 @@ Youtube: https://youtu.be/Xq1AWC1P8i0
 - AutoBuyer &mdash; monitor & restock ball inventory
 - AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
 - Auto-Release &mdash; release duplicates (keeps Legendary & Shiny)
-- Startup Commands &mdash; open all lootboxes (`;lb all`) and use razz berries (`;grazz all`) on start
+- Startup Commands &mdash; smart inventory check, open lootboxes (`;lb all`) and use razz berries (`;grazz all`) only when available
 - Daily catch limit detection & pause
 - Discord webhook notifications with Shiny/Legendary color highlights
 
@@ -99,7 +98,7 @@ Youtube: https://youtu.be/Xq1AWC1P8i0
 - Report feedback (correct/incorrect solutions)
 - Temp-ban detection & recovery
 - Configurable alarm volume (soft tones, no more ear-destroying beeps)
-- Session stats, all-time tracking (incl. egg hatch stats), live logging
+- Session stats, all-time tracking (incl. egg hatch + fish stats), live logging
 
 </td>
 </tr>
@@ -425,11 +424,13 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 **Session Stats (per bot start):**
 - Encounters, Caught, Fled, Catch Rate %
 - Catch rate broken down by rarity
+- Fished / Fished Fled (separate fish stats)
 - Best catches (Shiny, Legendary, Super Rare)
 - Session duration
 
 **All-Time Stats (persistent in `stats.json`):**
 - Total caught/fled across all sessions
+- Total fished / fished fled across all sessions
 - Shinies caught (with name + date)
 - Legendaries caught (with name + date)
 - Eggs hatched (total count, Pokemon list, shiny/normal breakdown)
@@ -503,7 +504,7 @@ CatchBot/
 
 <div align="center">
 
-**v3.1** &mdash; Created by **MyNameIsKillua**
+**v4.0** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
