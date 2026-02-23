@@ -4,16 +4,143 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v3.1-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-21.02.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v4.0-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-23.02.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
 
+## v4.0 &mdash; Full Auto Fish, Inventory Check, Captcha Improvements & Stats
+
+> Full auto fishing with MeowHelper rarity detection, smart inventory check on startup, captcha timeout now cancels pending tasks, button ID-based ball detection, fishing stats tracking, and bug fixes.
+
+<details>
+<summary><b>Full Auto Fish Support (New)</b></summary>
+
+&nbsp;
+
+#### Fully automated fishing with MeowHelper rarity detection
+
+The bot now fully handles the fishing flow: sends `;f`, detects the bite, clicks the rod button, waits for the fish Pokemon spawn, and catches it automatically.
+
+| Feature | Detail |
+|:--------|:-------|
+| **Spawn Detection** | Listens for message edits containing "fished a wild" after rod click |
+| **Rarity Detection** | Works with **MeowHelper Bot** to detect the correct rarity for ball selection |
+| **Default Rarity** | If no rarity detected, defaults to Common (Pokeball) |
+| **Webhook** | Fish catches sent to shared webhook with fishing-specific message |
+| **Console** | Fish catches show "Fished" instead of "Caught" in logs |
+| **Stats** | Session + All-Time fish stats (Fished / Fished Fled) |
+
+> [!NOTE]
+> **Requires MeowHelper Bot** in the channel for accurate rarity detection. Without it, all fish Pokemon default to Common rarity.
+
+</details>
+
+<details>
+<summary><b>Smart Inventory Check on Startup (New)</b></summary>
+
+&nbsp;
+
+#### Bot checks `;inv` before opening lootboxes or using razz berries
+
+Instead of blindly running `;lb all` and `;grazz all`, the bot now:
+
+1. Sends `;inv` first
+2. Parses the inventory
+3. Only runs `;lb all` if Lootboxes > 0
+4. Only runs `;grazz all` if GRazz Berries > 0
+5. Displays all ball counts with AutoBuy threshold status
+
+**Inventory Display:**
+```
+=== Inventory Check ===
+  Pokeballs: 55 --> OK (AutoBuy threshold: 10)
+  Greatballs: 69 --> OK (AutoBuy threshold: 10)
+  Ultraballs: 16 --> OK (AutoBuy threshold: 5)
+  Masterballs: 1 --> OK (AutoBuy threshold: 0)
+  Lootboxes: 2 | GRazz: 1 | Honey: 0 | Incense: 0 | Repels: 4
+```
+
+</details>
+
+<details>
+<summary><b>Captcha Timeout Cancels Pending Task (New)</b></summary>
+
+&nbsp;
+
+#### After 70 seconds, the pending 2captcha/Anti-Captcha task is reported as incorrect
+
+Previously, the 70-second timeout only stopped auto-solve and fired the alarm. Now it also sends a `reportIncorrect` to the captcha service, so:
+
+- The pending task is marked as failed
+- You are less likely to be charged for a solve that arrives after the timeout
+- The task ID is cleared so any late result is ignored
+
+</details>
+
+<details>
+<summary><b>Button ID-Based Ball Detection (New)</b></summary>
+
+&nbsp;
+
+#### Pokeball buttons detected by custom_id instead of position
+
+Previously, the bot clicked ball buttons based on their position in the button row (Button 0 = Pokeball, etc.). Now it matches buttons by their `custom_id` which contains the ball name, eliminating false throws caused by PokeMeow changing button order.
+
+</details>
+
+<details>
+<summary><b>Captcha Sub-Menu (New)</b></summary>
+
+&nbsp;
+
+#### Captcha settings moved to dedicated sub-menu
+
+Captcha configuration is no longer packed into the main config menu. A dedicated `[C] Captcha Settings` sub-menu contains all captcha-related options:
+
+- Service selection (2Captcha / Anti-Captcha / Manual)
+- API key management
+- Balance check
+- Max retries
+- Auto-solve toggle
+
+</details>
+
+<details>
+<summary><b>Fish Stats (New)</b></summary>
+
+&nbsp;
+
+#### Session + All-Time fishing statistics
+
+| Stat | Where |
+|:-----|:------|
+| Session Fished | `[I]` Session Statistics |
+| Session Fished Fled | `[I]` Session Statistics |
+| Total Fished (All-Time) | `[I]` All-Time Statistics |
+| Total Fished Fled (All-Time) | `[I]` All-Time Statistics + `stats.json` |
+
+</details>
+
+<details>
+<summary><b>Bug Fixes</b></summary>
+
+&nbsp;
+
+- **Startup false positive fix** &mdash; Bot no longer clicks Pokemon buttons during startup phase (`;inv`, `;egg hatch`, etc.). A `startup_phase` guard prevents any catch processing until the hunting loop starts.
+- **Inventory parsing fix** &mdash; Markdown bold markers (`**12**x Lootboxes`) are now stripped before regex parsing, so item counts are correctly detected.
+- **Fish spawn detection** &mdash; Added "fished a wild" pattern alongside "found a wild" in all Pokemon name extraction regexes.
+- **Fish webhook** &mdash; Fish catches now use fishing-specific shared webhook message instead of appearing as regular catches.
+
+</details>
+
+---
+
 ## v3.1 &mdash; Event Pokemon, Startup Commands & Bug Fixes
 
-> Event Pokemon detection with Premierball/Masterball override, startup lootbox & Grazz berry commands, false shiny detection fixed, egg shiny fix, and updated defaults, Captcha notity improvements.
+> Event Pokemon detection with Premierball/Masterball override, startup lootbox & razz berry commands, false shiny detection fixed, egg shiny fix, and updated defaults.
 
 <details>
 <summary><b>Event Pokemon Detection (New)</b></summary>
@@ -48,8 +175,9 @@ Two new toggleable commands that run **before** the egg check on startup:
 | Setting | Key | Command | Default |
 |:--------|:----|:--------|:--------|
 | Open all Lootboxes | `[T]` | `;lb all` | Off |
-| Use all Grazz Berries | `[I]` | `;grazz all` | Off |
+| Use all Razz Berries | `[I]` | `;grazz all` | Off |
 
+- 3-second cooldown between each command to avoid PokeMeow spam detection
 - Runs before the AutoEgg check
 - Shown in the startup log when enabled
 
@@ -110,34 +238,6 @@ Previously, the bot detected shiny egg hatches by checking the PokeMeow embed bo
 
 - Option `[F]` (forward original PokeMeow embed) removed from the webhook config menu entirely
 - Catch quests are now off by default since most users don't want them auto-renewed
-
-</details>
-
-<details>
-<summary><b>Captcha Notifier Customization</b></summary>
-
-&nbsp;
-
-#### Full control over captcha alerts
-
-All captcha notification settings are now configurable in the bot's config menu under **Captcha**:
-
-| Setting | Key | Description | Default |
-|:--------|:----|:------------|:--------|
-| Desktop Notification | `[N]` | Native Windows toast popup when a captcha appears | Enabled |
-| Sound Alarm | `[S]` | Ascending beep alarm (600 &rarr; 800 &rarr; 1000 Hz) | Enabled |
-| Alarm Volume | `[L]` | Volume 0&ndash;100% for the captcha alarm | 50% |
-| Alarm Repeat | `[J]` | How many times the alarm pattern repeats | 3x |
-| Captcha Service | `[D]` | Choose between Manual, 2Captcha, or Anti-Captcha | Manual |
-| Auto-Solve | `[A]` | Automatically send captcha image to solving service | Disabled |
-| Max Retries | `[R]` | How many times auto-solve retries on wrong answer | 3x |
-| 2Captcha API Key | `[C]` | Set your 2Captcha API key | &mdash; |
-| Anti-Captcha API Key | `[K]` | Set your Anti-Captcha API key | &mdash; |
-| Check Balance | `[G]` | Show remaining balance on your captcha service | &mdash; |
-
-- All settings are saved per-account in the config JSON
-- Sound alarm only works on Windows (uses `winsound`)
-- Desktop notifications use native Windows toast (works in .exe builds)
 
 </details>
 
