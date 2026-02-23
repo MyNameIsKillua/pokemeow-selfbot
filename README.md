@@ -22,6 +22,8 @@
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
 
+Youtube: https://youtu.be/Xq1AWC1P8i0
+
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
 [Features](#-features) &bull; [Installation](#-installation) &bull; [Usage](#-usage) &bull; [Multi-Account](#-multi-account-launcher) &bull; [Config](#%EF%B8%8F-config-overview) &bull; [Troubleshooting](#-troubleshooting)
