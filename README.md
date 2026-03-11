@@ -17,10 +17,10 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-4.0-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-5.0-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
-[![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/9EeFjEeXS4)
-[![YouTube Preview](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
+[![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
@@ -62,6 +62,7 @@
 - Smart ball selection (Pokeball to Masterball)
 - Event Pokemon detection (red embed) &mdash; auto Premierball / Masterball
 - Pokemon name recognition via `Pokemon_Names.txt`
+- Special form detection (Iron-Leaves, Arceus-Fairy, etc.) directly from message text
 - Full auto fishing (`;f`) &mdash; requires MeowHelper Bot for rarity detection
 - Auto daily tasks (`;daily`, `;h`, `;swap`, `;q`)
 - Colored console output per rarity
@@ -77,6 +78,7 @@
 - Startup Commands &mdash; smart inventory check, open lootboxes (`;lb all`) and use razz berries (`;grazz all`) only when available
 - Daily catch limit detection & pause
 - Discord webhook notifications with Shiny/Legendary color highlights
+- Shared webhook uses original PokeMeow images for shiny & special forms
 
 </td>
 </tr>
@@ -93,6 +95,7 @@
 <td width="50%">
 
 **Captcha & Monitoring**
+- CatchBot AI Solver (~94% accuracy, free, local)
 - 2Captcha + Anti-Captcha auto-solve
 - Balance check in config menu
 - Report feedback (correct/incorrect solutions)
@@ -108,31 +111,78 @@
 
 ## 📥 Installation
 
-### 1. Download Files
+### 1. Requirements
+
+Before getting started, make sure you have:
+
+- **Windows 10 / 11** (64-bit required)
+- **Discord Account** with a valid token
+- **PokeMeow Channel** – Channel ID where the bot operates
+
+> [!IMPORTANT]
+> CatchBot is a Discord self-bot. Use at your own risk. Self-bots violate Discord's ToS.
+> We recommend using alt accounts only.
+
+### 2. Download & Setup
 
 | File | Description |
 |:-----|:------------|
-| `CatchBot.exe` | Main bot (single account) |
-| `Catchbot-Multi-Acc-launcher.exe` | Multi-Account Launcher (required Main Bot) |
-| `Pokemon_Names.txt` | Pokemon name database |
+| **Full Package** | Contains everything: CatchBot.exe + AI Model (first install) |
+| **Update Only** | Just the new CatchBot.exe. Replace in your existing folder if you already have the model |
 
-Download all files and place them in a **shared folder**.
+Download the Full Package and extract to your desired folder.
 
-### 2. Antivirus Notice
+### 3. Folder Structure
+
+After extracting the Full Package ZIP, your folder should look like this:
+
+```
+CatchBot/                           ← Your main folder
+  catchbot_ai_model_encrypted/      ← AI Model (encrypted)
+  logs/                             ← Auto-created on first run
+  .catchbot_license                 ← Auto-created on first run
+  CatchBot.exe                      ← The bot
+  CatchBot_QuickStart_Guide.pdf     ← Quick Start guide
+  Catchbot-Multi-Acc-launcher.exe   ← Multi-account launcher
+  config.json                       ← Auto-created on first run
+  stats.json                        ← Auto-created on first run
+```
 
 > [!NOTE]
-> Some antivirus programs flag `.exe` files created with PyInstaller as suspicious. This is a **False Positive**.
-> If Windows Defender or another program blocks the file, add the folder to the exception list.
+> The `config.json`, `stats.json`, and `logs/` folder are created automatically on first run. Don't worry if they're missing after extracting.
+>
+> **Updating:** When updating, just replace `CatchBot.exe` with the new version. Your `config.json` and stats are kept. The AI model folder only needs replacing if the model was updated.
+
+### 4. Windows Antivirus / Windows Defender
+
+> [!WARNING]
+> Because CatchBot is compiled as an `.exe`, Windows Defender or other antivirus software may flag it as a virus or delete it. This is a **false positive**.
+> 
+> Before starting CatchBot for the first time, add the entire CatchBot folder (or at least CatchBot.exe) to Windows Defender exclusions:
+> 
+> **Settings > Privacy & Security > Windows Security > Virus & threat protection > Manage settings > Exclusions > Add an exclusion > Folder (or File)**
 
 <br>
 
 ## 🚀 Usage
 
-### Quick Start (Single Account)
+### 📖 Quick Start Guide
 
-1. Double-click `CatchBot.exe`
-2. Select `[3] Config` to set up your token and channel
-3. Select `[1] Start` or `[2] Start + Daily Tasks`
+For detailed setup instructions, configuration options, and troubleshooting, please refer to the **`CatchBot_QuickStart_Guide.pdf`** included in the ZIP file. The guide covers:
+
+- First Start & Setup (step-by-step)
+- Configuration Overview (all menu options)
+- Anti-Ban Options (keeping your account safe)
+- Captcha Solving (AI, 2Captcha, Anti-Captcha)
+- Multi-Account Setup (running multiple accounts)
+- Hotkeys & Controls (while the bot is running)
+- Troubleshooting & FAQ (common issues and solutions)
+
+### First Start (Single Account)
+
+1. **Launch:** Double-click `CatchBot.exe`
+2. **Configure:** Select `[3] Configuration` to set up your Discord token and channel ID
+3. **Start:** Select `[1]` to start, or `[2]` to start with daily tasks
 
 <details>
 <summary><b>How to get your Discord Token</b></summary>
@@ -142,12 +192,12 @@ Download all files and place them in a **shared folder**.
 1. Open Discord in your browser &mdash; https://discord.com/app
 2. Press `F12` (on Opera/GX: `CTRL+Shift+I`) for Developer Tools
 3. Go to the **Network** tab
-4. Press `F5` to reload
-5. Search for `api`, `science` or `ack` in the requests
-6. Find the **Authorization** header &mdash; that is your token
+4. Type anything in any channel to trigger a network request
+5. Find the **Authorization** header in the request headers section
+6. That value is your token
 
 > [!WARNING]
-> **Never share your token with anyone!**
+> **Never share your Discord token with anyone!** It grants full access to your account.
 
 </details>
 
@@ -157,19 +207,8 @@ Download all files and place them in a **shared folder**.
 <br>
 
 1. Enable Developer Mode in Discord &mdash; Settings > Advanced > Developer Mode
-2. Right-click on the channel > **Copy ID**
-
-</details>
-
-<details>
-<summary><b>First-Time Configuration</b></summary>
-
-<br>
-
-1. Select `[3] Config` in the main menu
-2. Select `[8]` and paste your token
-3. Select `[9]` and paste the channel ID
-4. Configure auto-catch, ball rules, etc.
+2. Right-click on the channel you want to use
+3. Click **Copy Channel ID**
 
 </details>
 
@@ -295,7 +334,7 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | Webhook | `W` | Discord webhook setup | Off |
 | Alarm Volume | `L` | Alarm volume (0-100%) | 50% |
 | | | **=== Captcha ===** | |
-| Captcha Service | `D` | 2Captcha / Anti-Captcha / Manual | Manual |
+| Captcha Service | `D` | CatchBot AI / 2Captcha / Anti-Captcha / Manual | CatchBot AI |
 | 2Captcha Key | `C` | Set API key | - |
 | Anti-Captcha Key | `K` | Set API key | - |
 | Balance | `G` | Check balance of both services | - |
@@ -355,7 +394,7 @@ Open with Config > `[B]`
 
 **Defaults:**
 
-| Ball | Buy when &le; | Amount | Command |
+| Ball | Buy when ≤ | Amount | Command |
 |:-----|:-------------|:-------|:--------|
 | Pokeball | 10 | 200x | `;shop buy pb 200` |
 | Greatball | 10 | 100x | `;shop buy gb 100` |
@@ -398,17 +437,21 @@ Get rare catches sent straight to your phone!
 
 Detection is optimized for PokeMeow: numbers only 1-9, 3-6 digits.
 
-**Option A: 2Captcha**
+**Option A: CatchBot AI (Recommended)**
+1. Config > `[D]` > Select "CatchBot AI" (Option 1)
+2. Done! No API key needed, runs locally for free (~94% accuracy)
+
+**Option B: 2Captcha**
 1. Create an account at https://2captcha.com
 2. Config > `[D]` > Select "2Captcha"
 3. Config > `[C]` > Paste API key
 
-**Option B: Anti-Captcha**
+**Option C: Anti-Captcha**
 1. Create an account at https://anti-captcha.com
 2. Config > `[D]` > Select "Anti-Captcha"
 3. Config > `[K]` > Paste API key
 
-Check balance: Config > `[G]` &mdash; color-coded: Green >&dollar;1, Yellow >&dollar;0.20, Red <&dollar;0.20
+Check balance: Config > `[G]` &mdash; color-coded: Green >$1, Yellow >$0.20, Red <$0.20
 
 After each captcha attempt, the bot automatically reports whether the solution was correct or incorrect. With 2Captcha this improves worker quality; with Anti-Captcha an incorrect solution can lead to a refund.
 
@@ -437,24 +480,6 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 - Number of sessions
 
 </details>
-
-<br>
-
-## 📁 File Structure
-
-```
-CatchBot/
-├── CatchBot.exe                     # Main bot
-├── Catchbot-Multi-Acc-launcher.exe  # Multi-Account Launcher
-├── Pokemon_Names.txt                # Pokemon name database
-├── config.json                      # Configuration (auto-created)
-├── config_<name>.json               # Per-account config (multi-acc)
-├── stats.json                       # Persistent statistics
-├── stats_<name>.json                # Per-account stats (multi-acc)
-├── launcher_config.json             # Launcher account list
-└── logs/                            # Log files per session
-    └── <name>/
-```
 
 <br>
 
@@ -504,7 +529,7 @@ CatchBot/
 
 <div align="center">
 
-**v4.0** &mdash; Created by **MyNameIsKillua**
+**v5.0** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
