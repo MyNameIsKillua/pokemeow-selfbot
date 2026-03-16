@@ -17,7 +17,7 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-5.0-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-5.1-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
@@ -63,7 +63,7 @@
 - Event Pokemon detection (red embed) &mdash; auto Premierball / Masterball
 - Pokemon name recognition via `Pokemon_Names.txt`
 - Special form detection (Iron-Leaves, Arceus-Fairy, etc.) directly from message text
-- Full auto fishing (`;f`) &mdash; requires MeowHelper Bot for rarity detection
+- Full auto fishing (`;f`) &mdash; configurable interval (2-10x `;p`), requires MeowHelper Bot for rarity detection
 - Auto daily tasks (`;daily`, `;h`, `;swap`, `;q`)
 - Colored console output per rarity
 
@@ -71,6 +71,8 @@
 <td width="50%">
 
 **Automation Systems**
+- Spawn Command Selection &mdash; use `;p`, `;find`, or both randomly with configurable percentage
+- Custom Messages &mdash; append custom text to spawn commands with independent command choice
 - AutoEgg &mdash; hatch + hold on startup & during hunting, egg stats tracking
 - AutoBuyer &mdash; monitor & restock ball inventory
 - AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
@@ -327,6 +329,7 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | Auto-Catch | `1` | Toggle automatic catching | On |
 | Ball Rules | `2` | Set ball per rarity | Default |
 | Fish | `3` | Toggle fishing | Off |
+| Fish Interval | `4` | Fish every Nx `;p` (2-10) | 2 |
 | | | **=== Systems ===** | |
 | AutoBuyer | `B` | Ball purchase config | Off |
 | AutoEgg | `E` | Toggle egg hatch/hold | Off |
@@ -344,6 +347,9 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | | | **=== Startup Commands ===** | |
 | Open Lootboxes | `T` | Send `;lb all` on startup | Off |
 | Use Razz Berries | `I` | Send `;grazz all` on startup | Off |
+| | | **=== Anti-Ban (Config > `[A]`) ===** | |
+| Spawn Command | `W` | `;p` only / `;find` only / Both random | `;p` only |
+| Custom Message | submenu | Append custom text to spawn commands | Off |
 | | | **=== Settings ===** | |
 | Token | `8` | Set Discord token | - |
 | Channel ID | `9` | Set channel ID | - |
@@ -529,7 +535,7 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 
 <div align="center">
 
-**v5.0** &mdash; Created by **MyNameIsKillua**
+**v5.1** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
