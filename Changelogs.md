@@ -4,12 +4,105 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v5.0-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-11.03.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v5.1-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-15.03.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
+
+## v5.1 &mdash; Configurable AutoFish Interval, Spawn Command Selection & Custom Messages
+
+> Configurable fish interval (2-10x), spawn command selection (`;p` / `;find` / both random), custom message support with independent command settings, ball throw delay, and various hotfixes.
+
+<details>
+<summary><b>Configurable AutoFish Interval (New)</b></summary>
+
+&nbsp;
+
+#### Set how often the bot sends `;f` after `;p` commands
+
+Previously, AutoFish was hardcoded to fire after every 2x `;p`. Now you can configure the interval anywhere from 2 to 10.
+
+| Setting | Description |
+|:--------|:------------|
+| **Config `[3]`** | Toggle AutoFish on/off |
+| **Config `[4]`** | Set Fish Interval (2-10) &mdash; only visible when AutoFish is enabled |
+| **Default** | Every 2x `;p` (same as before) |
+
+Example: Set to 6 and the bot will send `;f` after every 6th `;p` command.
+
+</details>
+
+<details>
+<summary><b>Spawn Command Selection (New)</b></summary>
+
+&nbsp;
+
+#### Choose between `;p`, `;find`, or both randomly
+
+New option in the Anti-Ban menu to control which spawn command the bot uses:
+
+| Mode | Behavior |
+|:-----|:---------|
+| **`;p` only** | Always use `;p` (default, same as before) |
+| **`;find` only** | Always use `;find` |
+| **Both random** | Randomly picks `;p` or `;find` based on configurable percentage |
+
+| Setting | Location |
+|:--------|:---------|
+| **Config `[A]` > `[W]`** | Spawn Command selection |
+| **Percentage** | When "Both random" is selected, set the % chance for `;p` (rest goes to `;find`) |
+
+Example: Set to 70% and the bot will use `;p` 70% of the time and `;find` 30% of the time.
+
+</details>
+
+<details>
+<summary><b>Custom Message with Command Selection (New)</b></summary>
+
+&nbsp;
+
+#### Send custom messages after spawn commands with independent command choice
+
+The Custom Message feature now supports its own spawn command selection, independent from the main spawn command setting.
+
+| Setting | Location | Description |
+|:--------|:---------|:------------|
+| **Toggle** | Config `[3]` submenu `[1]` | Enable/disable custom messages |
+| **Message** | Config `[3]` submenu `[2]` | Set the message text (appended after command) |
+| **Chance** | Config `[3]` submenu `[3]` | % chance to use custom message instead of plain command |
+| **Command** | Config `[3]` submenu `[4]` | `;p` only / `;find` only / Both random |
+
+Example: With 50% chance and `;find` selected, half the spawns will be `;find your_message` instead of the normal spawn command.
+
+> The custom message command setting is **independent** from the main spawn command &mdash; you can use `;p` normally but have custom messages use `;find`.
+
+</details>
+
+<details>
+<summary><b>Ball Throw Delay (New)</b></summary>
+
+&nbsp;
+
+#### Added configurable delay before throwing balls
+
+A new delay setting that adds a short pause before the bot clicks a ball button after a Pokemon spawns. Makes catching behavior appear more human-like.
+
+</details>
+
+<details>
+<summary><b>Hotfixes & Performance Improvements</b></summary>
+
+&nbsp;
+
+- Various performance optimizations
+- Minor bug fixes and stability improvements
+- Code cleanup and refactoring
+
+</details>
+
+---
 
 ## v5.0 &mdash; CatchBot AI Solver, Quest Reroll Overhaul, Shiny Webhook Images & More
 
