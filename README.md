@@ -17,11 +17,12 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-5.1-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-5.2-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
+[![Updated](https://img.shields.io/badge/Updated-19.03.2026-green?style=for-the-badge)]()
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
@@ -73,6 +74,10 @@
 **Automation Systems**
 - Spawn Command Selection &mdash; use `;p`, `;find`, or both randomly with configurable percentage
 - Custom Messages &mdash; append custom text to spawn commands with independent command choice
+- Custom Messages for `;fish` &mdash; separate custom messages specifically for fishing command with independent chance
+- Remote Control System &mdash; Discord command system with 14 commands (!stop, !start, !daily, !stats, !ss, etc.)
+- Activity Messages &mdash; randomly send casual messages after catches for natural appearance
+- Rate Limit Protection &mdash; auto-detect command spam and pause to avoid bans
 - AutoEgg &mdash; hatch + hold on startup & during hunting, egg stats tracking
 - AutoBuyer &mdash; monitor & restock ball inventory
 - AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
@@ -222,8 +227,7 @@ For detailed setup instructions, configuration options, and troubleshooting, ple
 | `2` | Start + Daily Tasks (`;daily`, `;h`, `;swap`, `;q` first) |
 | `3` | Open configuration menu |
 | `4` | View log files |
-| `5` | Check for updates |
-| `6` | Exit |
+| `5` | Exit |
 
 ### Hotkeys (while running)
 
@@ -335,6 +339,9 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | AutoEgg | `E` | Toggle egg hatch/hold | Off |
 | AutoQuestRenewer | `Q` | Auto-renew unwanted quests | Off |
 | Webhook | `W` | Discord webhook setup | Off |
+| Remote Control | `C` | Discord command control (14 commands) | Off |
+| Custom Message ;f | `N` | Custom messages for `;fish` command | Off |
+| Rate Limit Protection | `R` | Auto-detect spam & pause | On |
 | Alarm Volume | `L` | Alarm volume (0-100%) | 50% |
 | | | **=== Captcha ===** | |
 | Captcha Service | `D` | CatchBot AI / 2Captcha / Anti-Captcha / Manual | CatchBot AI |
@@ -349,7 +356,8 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | Use Razz Berries | `I` | Send `;grazz all` on startup | Off |
 | | | **=== Anti-Ban (Config > `[A]`) ===** | |
 | Spawn Command | `W` | `;p` only / `;find` only / Both random | `;p` only |
-| Custom Message | submenu | Append custom text to spawn commands | Off |
+| Custom Message | `1` | Append custom text to spawn commands | Off |
+| Activity Messages | `2` | Send random casual messages | Off |
 | | | **=== Settings ===** | |
 | Token | `8` | Set Discord token | - |
 | Channel ID | `9` | Set channel ID | - |
@@ -535,7 +543,7 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 
 <div align="center">
 
-**v5.1** &mdash; Created by **MyNameIsKillua**
+**v5.2** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
