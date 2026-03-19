@@ -4,12 +4,225 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v5.1-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-15.03.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v5.2-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-19.03.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
+
+## v5.2 &mdash; Remote Control System, Custom Fish Messages, Rate Limit Protection & Auto-Update
+
+> Discord remote control system with 14 commands, custom messages for `;fish`, captcha attempt tracking in stats, rate limit protection, activity messages for natural look, and auto-update checker on bot start.
+
+<details>
+<summary><b>Remote Control System (New - Major Feature)</b></summary>
+
+&nbsp;
+
+#### Full Discord command system to control bot from a private channel
+
+A complete remote control integration allowing you to pause, resume, run daily tasks, check stats, and more without touching the console.
+
+| Feature | Details |
+|:--------|:--------|
+| **Config Menu** | Config > `[C]` Remote Control Settings |
+| **Channel Setup** | Set a private Discord channel for commands (control_channel_id) |
+| **Prefix** | Customizable command prefix (default: `!`) |
+| **Whitelist** | Optional: restrict commands to specific user IDs |
+| **Status on Start** | Displays "✓ Remote Control enabled - Try !help in your control channel" when enabled |
+
+**Available Commands:**
+
+| Command | Effect |
+|:--------|:-------|
+| `!stop` | Pause the bot |
+| `!start` | Resume the bot |
+| `!sleep [m]` | Sleep for m minutes |
+| `!wake` | Wake from sleep |
+| `!status` | Bot status & config |
+| `!stats` | Session stats |
+| `!captcha` | Captcha stats |
+| `!lifetime` | Lifetime stats |
+| `!uptime` | Bot running time |
+| `!channel` | Hunting channel |
+| `!fish` | Toggle fishing |
+| `!daily` | Run daily tasks |
+| `!ss [1-4]` | Screenshot monitor |
+| `!ping` | Check if alive |
+
+| Setting | Location | Description |
+|:--------|:---------|:------------|
+| **Toggle** | Config > `[C]` > `[1]` | Enable/disable remote control |
+| **Channel ID** | Config > `[C]` > `[2]` | Set control channel ID |
+| **Prefix** | Config > `[C]` > `[3]` | Set command prefix (default: `!`) |
+| **Whitelist** | Config > `[C]` > `[4]` | Add/remove/clear whitelisted user IDs |
+
+</details>
+
+<details>
+<summary><b>Custom Message for ;fish (New)</b></summary>
+
+&nbsp;
+
+#### Append custom text to `;fish` commands independently
+
+Previously, custom messages only worked with spawn commands (`;p` / `;find`). Now you can have a separate custom message for fishing.
+
+| Setting | Config Location | Description | Default |
+|:--------|:-----------------|:------------|:--------|
+| **Enable** | Config > `[N]` > `[1]` | Toggle custom fishing messages | Off |
+| **Message** | Config > `[N]` > `[2]` | Custom text to append after `;f` | - |
+| **Chance** | Config > `[N]` > `[3]` | % chance to use custom message vs plain `;f` | 0% |
+
+**Example:** With message "come onnn fish" and 50% chance, half your `;f` commands become `;f come onnn fish`
+
+**Independent Configuration:**
+- Spawn command custom message (`;p` / `;find`) is separate from fishing custom message
+- You can have spawn messages without fishing messages or vice versa
+
+</details>
+
+<details>
+<summary><b>Captcha Attempt Tracking & Stats (New)</b></summary>
+
+&nbsp;
+
+#### Track how many attempts each captcha took to solve
+
+Session and lifetime stats now record captcha solve attempts in a breakdown format.
+
+| Stat | Location | Shows |
+|:-----|:---------|:------|
+| **Session** | Press `[I]` while running | Session captcha attempts: 1 Attempt: 5x, 2 Attempts: 3x, etc. |
+| **Lifetime** | Press `[I]` | All-time captcha breakdown across all sessions |
+| **Console** | `stats.json` | `captcha_attempts` object with attempt count as key |
+| **Remote** | `!captcha` command | Detailed session + lifetime captcha stats via Discord |
+
+**Example console output:**
+```
+SESSION CAPTCHA STATS:
+  1 Attempt:   8x
+  2 Attempts:  2x
+  3 Attempts:  1x
+  Total:      11x
+
+LIFETIME CAPTCHA STATS:
+  1 Attempt:  65x
+  2 Attempts: 18x
+  3 Attempts:  3x
+  Total:      86x
+```
+
+</details>
+
+<details>
+<summary><b>Rate Limit Protection (New)</b></summary>
+
+&nbsp;
+
+#### Auto-detect command spam and pause to avoid bans
+
+Tracks consecutive commands sent without a PokeMeow response. If threshold is hit, bot sleeps automatically.
+
+| Setting | Config Location | Description | Default |
+|:--------|:-----------------|:------------|:--------|
+| **Enable** | Config > `[R]` > `[1]` | Toggle rate limit protection | On |
+| **Command Threshold** | Config > `[R]` > `[2]` | Max consecutive commands without response | 3 |
+| **Sleep Duration** | Config > `[R]` > `[3]` | Sleep for X seconds when triggered | 60s |
+
+**How it works:**
+1. Each `;p` / `;f` / `;inv` command increments counter
+2. Each PokeMeow response resets counter to 0
+3. If counter hits threshold (default 3), bot sleeps for configured time
+4. After sleep, tries again; if still no response, sleeps again
+5. Automatically resumes when PokeMeow responds
+
+**Example:** With threshold 3 and sleep 60s: if bot sends 3 commands with no response, it sleeps 60s before continuing
+
+</details>
+
+<details>
+<summary><b>Activity Messages for Natural Look (New)</b></summary>
+
+&nbsp;
+
+#### Randomly send normal messages to look more active
+
+Occasionally send casual messages after catches to make the account appear less bot-like.
+
+| Setting | Config Location | Description | Default |
+|:--------|:-----------------|:------------|:--------|
+| **Enable** | Config > `[A]` > Activity Messages | Toggle activity messages | Off |
+| **Chance** | Config > `[A]` > Custom Messages List | % chance after each catch | 5% |
+| **Message Pool** | Config > `[A]` > Manage Messages | Add/remove/view custom messages | Default pool provided |
+
+**Default Messages (if no custom list):**
+
+
+**Custom Messages:**
+- Config > `[A]` > `[N]` to manage custom message list
+- Add your own messages or remove defaults
+- Bot randomly selects from your message pool
+
+**Benefit:** Makes account activity look more human and less obviously automated.
+
+</details>
+
+<details>
+<summary><b>Auto-Update Checker on Bot Start (New)</b></summary>
+
+&nbsp;
+
+#### Check GitHub for new CatchBot releases on startup
+
+The bot now automatically checks for updates when you start it.
+
+| Trigger | Behavior |
+|:--------|:---------|
+| **Sync Check** | On startup after license check |
+| **Async Check** | Also runs async in background after bot logs in |
+| **New Version** | Shows banner with current/latest version + download link |
+| **Control Channel** | If remote control enabled, also sends update notification to control channel |
+| **No Update** | Shows "Up to date!" and continues silently |
+
+**Startup Flow:**
+1. License verified ✓
+2. Update check (sync) - blocks for ~2s max
+3. If update found: shows banner, waits for Enter
+4. Main menu appears
+
+</details>
+
+<details>
+<summary><b>Config Menu Changes</b></summary>
+
+&nbsp;
+
+| New Option | Key | Location | Description |
+|:-----------|:---:|:---------|:------------|
+| **Remote Control** | `C` | Main Settings | Configure Discord remote control |
+| **Custom Message ;f** | `N` | Main Settings | Custom messages for `;fish` command |
+| **Rate Limit Protection** | `R` | Main Settings | Prevent spam detection |
+| **Activity Messages** | Inside `[A]` Anti-Ban | Sub-menu | Send random casual messages |
+| **Whitelist Management** | Inside `[C]` Remote Control | Sub-menu | Add/remove/clear whitelisted users |
+
+</details>
+
+<details>
+<summary><b>Bug Fixes & Improvements</b></summary>
+
+&nbsp;
+
+- **Daily tasks pause** &mdash; Bot now stays paused during entire `!daily` execution (6s countdown + task runtime)
+- **Remote command logging** &mdash; All remote commands logged to console with color-coded output
+- **Discord formatting** &mdash; Remote responses use bold titles and code blocks for clarity
+- **Sleep auto-wake** &mdash; Bot checks sleep timer every iteration and auto-resumes
+- **Captcha tracking** &mdash; Properly saves to both session_stats and persistent_stats
+
+</details>
+
+---
 
 ## v5.1 &mdash; Configurable AutoFish Interval, Spawn Command Selection & Custom Messages
 
