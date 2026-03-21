@@ -22,7 +22,7 @@
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
-[![Updated](https://img.shields.io/badge/Updated-19.03.2026-green?style=for-the-badge)]()
+[![Updated](https://img.shields.io/badge/Updated-21.03.2026-green?style=for-the-badge)]()
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
