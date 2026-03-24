@@ -4,72 +4,39 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v5.3-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-21.03.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v6.0-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-24.03.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
 
-## v5.3 &mdash; AutoBuyer Comma Fix & Captcha Duplicate Solve Guard
+## v6.0 &mdash; Improved AI Captcha Solver (~98% Accuracy)
 
-> Fixed AutoBuyer incorrectly reading ball counts above 1,000 due to comma formatting, and added a guard to prevent the captcha solver from firing twice simultaneously when Discord sends duplicate events.
+> Major AI model upgrade — the CatchBot AI Solver now reaches ~98% accuracy, up from ~94% in v5.x. No config changes required.
 
 <details>
-<summary><b>AutoBuyer & Inventory: Large Number Parsing Fix</b></summary>
+<summary><b>CatchBot AI Solver Upgrade (Improved)</b></summary>
 
 &nbsp;
 
-#### Ball counts above 1,000 were parsed incorrectly, causing unnecessary purchases
+#### New model with significantly higher captcha solve rate
 
-PokéMeow displays quantities like `15,075x Poke ball`. The bot was stopping at the comma and reading only the digits before it — so `15,075` became `15`, and `1,237` became `1`. This triggered AutoBuy even when you had thousands of balls left.
+The AI model has been fully retrained with an improved architecture and larger dataset, resulting in a major accuracy boost.
 
-**Affected areas (both now fixed):**
+| Metric | v5.x | v6.0 |
+|:-------|:-----|:-----|
+| **Accuracy** | ~94% | ~98% |
+| **Model** | TrOCR-based | TrOCR-based (retrained) |
+| **Speed** | Same | Same |
+| **Setup** | Same | Same |
 
-| Area | When it runs |
-|:-----|:-------------|
-| **Startup `;inv` check** | On bot start — inventory display + AutoBuy threshold comparison |
-| **Post-catch inventory scan** | After every catch result — live AutoBuyer trigger |
+- No configuration changes needed &mdash; just replace `CatchBot.exe` and the `catchbot_ai_model_encrypted/` folder
+- Higher accuracy means fewer failed attempts, less retries, and lower captcha detection risk
+- Fully local & free as always &mdash; no API key required
 
-**What was broken → what it does now:**
-
-| Example Value | Before | After |
-|:-------------|:-------|:------|
-| `15,075x Poke ball` | read as `15` | read as `15075` ✓ |
-| `1,237x Great ball` | read as `1` | read as `1237` ✓ |
-| `340x Ultra ball` | read as `340` | read as `340` ✓ |
-
-Also fixes comma parsing for Lootboxes, GRazz Berries, Honey, Incense, and Repels in the startup inventory display.
-
-</details>
-
-<details>
-<summary><b>Captcha Duplicate Solve Guard (Bug Fix)</b></summary>
-
-&nbsp;
-
-#### Very rare % chance but still could have happen - Bot was sending the captcha answer twice when the AI got it wrong cauz of cache errors
-
-When the AI submitted a wrong answer, Discord fired two events simultaneously — `on_message` and `on_message_edit` — for the same "incorrect response" from PokéMeow. The bot treated both as separate triggers and started two solve attempts at the same time, sending duplicate answers.
-
-**Fix:** Added an internal `_solving_captcha` flag that blocks any new solve attempt while one is already in progress. The flag resets automatically when the solve finishes (success, failure, or error).
-
-| State | Behavior |
-|:------|:---------|
-| No solve running | Proceeds normally |
-| Solve already in progress | Second trigger is ignored immediately |
-| Solve finishes (any outcome) | Flag resets, next captcha triggers fresh solve |
-
-</details>
-
-<details>
-<summary><b>Bug Fixes</b></summary>
-
-&nbsp;
-
-- **AutoBuyer over-buying** &mdash; Comma-formatted ball counts (e.g. `1,237`) now parsed correctly in both startup check and live post-catch scan
-- **Duplicate captcha submissions** &mdash; Concurrent solve attempts blocked via `_solving_captcha` guard flag
-- **Startup inventory display** &mdash; Lootbox, GRazz, Honey, Incense, Repel counts now also parse comma-formatted numbers correctly
+> [!NOTE]
+> The release package is significantly larger in v6.0 due to the upgraded model size: **345 MB → 1.66 GB**. Make sure you have enough disk space and download the full package when updating.
 
 </details>
 
