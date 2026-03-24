@@ -17,12 +17,12 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-5.3-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-6.0-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
 [![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
-[![Updated](https://img.shields.io/badge/Updated-21.03.2026-green?style=for-the-badge)]()
+[![Updated](https://img.shields.io/badge/Updated-24.03.2026-green?style=for-the-badge)]()
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
@@ -102,7 +102,7 @@
 <td width="50%">
 
 **Captcha & Monitoring**
-- CatchBot AI Solver (~94% accuracy, free, local)
+- CatchBot AI Solver (~98% accuracy, free, local)
 - 2Captcha + Anti-Captcha auto-solve
 - Balance check in config menu
 - Report feedback (correct/incorrect solutions)
@@ -453,7 +453,7 @@ Detection is optimized for PokeMeow: numbers only 1-9, 3-6 digits.
 
 **Option A: CatchBot AI (Recommended)**
 1. Config > `[D]` > Select "CatchBot AI" (Option 1)
-2. Done! No API key needed, runs locally for free (~94% accuracy)
+2. Done! No API key needed, runs locally for free (~98% accuracy)
 
 **Option B: 2Captcha**
 1. Create an account at https://2captcha.com
@@ -543,7 +543,7 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 
 <div align="center">
 
-**v5.3** &mdash; Created by **MyNameIsKillua**
+**v6.0** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
