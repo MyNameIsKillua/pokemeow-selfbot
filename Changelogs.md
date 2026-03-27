@@ -4,12 +4,87 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v6.0-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-24.03.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v6.1-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-27.03.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
+
+## v6.1 &mdash; New Remote Commands, Captcha Retry Fix & QoL
+
+> Two new remote control commands (`!inv`, `!text`), critical captcha retry bugfix, and cleaner output.
+
+<details>
+<summary><b>New Remote Commands (New)</b></summary>
+
+&nbsp;
+
+#### `!inv` &mdash; Remote Inventory Check
+
+Pause the bot, send `;inv` in the catch channel, parse the full inventory, and report back to the control channel. Automatically opens lootboxes (`;lb all`) and uses razz berries (`;grazz all`) if available, then resumes.
+
+| Item | Parsed |
+|:-----|:-------|
+| **PokeCoins** | Total coin count |
+| **Balls** | Pokeball, Greatball, Ultraball, Masterball, Premierball |
+| **Items** | Lootboxes, GRazz Berries, Honey, Incense, Repels |
+
+#### `!text <message>` &mdash; Send Custom Messages
+
+Send any message or PokeMeow command (`;bal`, `;q`, `;coins`, `;inv`, etc.) in the catch channel from remote. The bot pauses, sends the message, waits for PokeMeow's response, cleans it up, and forwards it to the control channel. Bot stays paused until `!start`.
+
+| Feature | Details |
+|:--------|:--------|
+| **5s delay** | First `!text` waits 5 seconds before sending |
+| **Instant follow-up** | If bot is already paused, subsequent `!text` commands send instantly |
+| **Response forwarding** | PokeMeow response is cleaned and forwarded to control channel |
+| **Discord cleanup** | Strips custom emojis, converts `:white_check_mark:` → ✅ / `:x:` → ❌, converts Discord timestamps to readable dates |
+
+</details>
+
+<details>
+<summary><b>Captcha Retry Bugfix (Critical Fix)</b></summary>
+
+&nbsp;
+
+#### Fixed: AI Captcha Solver reused old image on retry
+
+When a captcha answer was wrong, the retry logic passed the **old cached message** (with the old captcha image) to the solver instead of the **current edited message** with the new captcha image. This caused the AI to download the same image, produce the same wrong answer, and fail silently.
+
+**Fix:**
+- Retry now uses the current message from `on_message_edit`
+- Waits 3 seconds for PokeMeow to fully update the embed with the new image
+- Re-fetches the message via `channel.fetch_message()` to guarantee the latest version
+- Console now properly shows the full retry flow (download → solve → send) instead of instant failure
+
+</details>
+
+<details>
+<summary><b>ONNX CUDA Warning Suppression (Improvement)</b></summary>
+
+&nbsp;
+
+#### Silenced noisy CUDA fallback errors on systems without GPU
+
+On laptops without NVIDIA GPU/CUDA, ONNX Runtime printed large red error walls about missing `cublasLt64_12.dll` and failed CUDA provider creation. The bot still worked fine on CPU, but the output was confusing.
+
+**Fix:** OS-level stderr redirect during model loading suppresses native C++ ONNX warnings. GPU systems still use CUDA normally. Console now shows a clean `Device: CPU` line.
+
+</details>
+
+<details>
+<summary><b>Other Improvements</b></summary>
+
+&nbsp;
+
+- **`!text` response cleanup** &mdash; 60+ Discord emoji codes mapped to Unicode (✅❌⭐✨⚡🔥💰💎🎣 etc.), Discord timestamps converted to `DD.MM.YYYY HH:MM`
+- **`!inv` includes PokeCoins & Premierballs** &mdash; Full inventory overview with coin count and all ball types
+- **Remote command help updated** &mdash; `!help` now lists all 16 commands including `!inv` and `!text`
+
+</details>
+
+---
 
 ## v6.0 &mdash; Improved AI Captcha Solver (~98% Accuracy)
 
