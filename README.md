@@ -17,12 +17,12 @@
 
 ### Automate your PokeMeow grind.
 
-[![Version](https://img.shields.io/badge/version-6.1-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/version-6.2-blue?style=for-the-badge)]()
 [![Python](https://img.shields.io/badge/python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white)]()
-[![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
+[![Discord](https://img.shields.io/badge/Discord_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jZh6TFBZE9)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Xq1AWC1P8i0)
 [![License](https://img.shields.io/badge/license-Educational-green?style=for-the-badge)]()
-[![Updated](https://img.shields.io/badge/Updated-27.03.2026-green?style=for-the-badge)]()
+[![Updated](https://img.shields.io/badge/Updated-16.04.2026-green?style=for-the-badge)]()
 
 **Auto-catch Pokemon with customizable settings, multi-account support, captcha solving, and more.**
 
@@ -64,7 +64,8 @@
 - Event Pokemon detection (red embed) &mdash; auto Premierball / Masterball
 - Pokemon name recognition via `Pokemon_Names.txt`
 - Special form detection (Iron-Leaves, Arceus-Fairy, etc.) directly from message text
-- Full auto fishing (`;f`) &mdash; configurable interval (2-10x `;p`), requires MeowHelper Bot for rarity detection
+- Full auto fishing (`;f`) &mdash; configurable interval (2-10x `;p`)
+- **NEW in v6.2:** Smart fishing ball pick &mdash; reads PokeMeow's `*_unlocked` emoji recommendation and throws the exact ball it suggests (Dive/Beast mapped to Masterball)
 - Auto daily tasks (`;daily`, `;h`, `;swap`, `;q`)
 - Colored console output per rarity
 
@@ -81,6 +82,7 @@
 - AutoEgg &mdash; hatch + hold on startup & during hunting, egg stats tracking
 - AutoBuyer &mdash; monitor & restock ball inventory
 - AutoQuestRenewer &mdash; auto-renew unwanted quests using scrolls
+- **NEW in v6.2:** AutoQuestClaim &mdash; every 2h+ sends `;q` to pull a new quest and auto-rerolls it using Renewer logic
 - Auto-Release &mdash; release duplicates (keeps Legendary & Shiny)
 - Startup Commands &mdash; smart inventory check, open lootboxes (`;lb all`) and use razz berries (`;grazz all`) only when available
 - Daily catch limit detection & pause
@@ -337,7 +339,9 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | | | **=== Systems ===** | |
 | AutoBuyer | `B` | Ball purchase config | Off |
 | AutoEgg | `E` | Toggle egg hatch/hold | Off |
-| AutoQuestRenewer | `Q` | Auto-renew unwanted quests | Off |
+| Quest Settings | `Q` | AutoQuestRenewer + AutoQuestClaimer | Off |
+| &nbsp;&nbsp;&nbsp;&nbsp;↳ AutoQuestRenewer | `[Q] > [1]` | Auto-renew unwanted quests (Daily Tasks) | Off |
+| &nbsp;&nbsp;&nbsp;&nbsp;↳ AutoQuestClaimer | `[Q] > [2]` | Every 2h+ send `;q` and auto-reroll (min 120m / 20s) | Off |
 | Webhook | `W` | Discord webhook setup | Off |
 | Remote Control | `C` | Discord command control (16 commands) | Off |
 | Custom Message ;f | `N` | Custom messages for `;fish` command | Off |
@@ -378,10 +382,13 @@ socks5://user:pass@host:port        # SOCKS5 with Auth
 | Shiny | Masterball | 5th (far right) | Pink |
 | Event (Common-Super Rare) | Premierball | 4th | Red embed |
 | Event (Legendary/Shiny) | Masterball | 5th (far right) | Red embed |
+| **Fishing (any rod)** | **PokeMeow recommendation** | Matched via `*_unlocked` emoji | Bypasses rarity rules |
 
 **Available Balls:** `pb` (Pokeball), `gb` (Greatball), `ub` (Ultraball), `prb` (Premierball), `mb` (Masterball)
 
 > Event Pokemon are detected by their **red embed border** from PokeMeow. Both event overrides can be toggled individually in Ball Rules (`[E]` and `[V]`).
+>
+> **Fishing (v6.2+)** uses PokeMeow's own ball suggestion shown via the `:xxball_unlocked:` emoji on the spawn message &mdash; rarity rules, whitelist, and event overrides are bypassed while fishing. Dive Ball / Beast Ball recommendations are mapped to Masterball (no `db`/`bb` shortcut exists in PokeMeow's fishing prompt).
 
 **Example output:**
 ```
@@ -543,7 +550,7 @@ Press `[I]` while the bot is running to view current stats. On exit, they are di
 
 <div align="center">
 
-**v6.1** &mdash; Created by **MyNameIsKillua**
+**v6.2** &mdash; Created by **MyNameIsKillua**
 
 [![Discord](https://img.shields.io/badge/Join_the_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/y42nVCGZqF)
 
