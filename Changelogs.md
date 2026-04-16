@@ -4,12 +4,97 @@
 
 **All notable changes to CatchBot are documented here.**
 
-[![Current Version](https://img.shields.io/badge/Latest-v6.1-blue?style=for-the-badge)]()
-[![Release Date](https://img.shields.io/badge/Updated-27.03.2026-green?style=for-the-badge)]()
+[![Current Version](https://img.shields.io/badge/Latest-v6.2-blue?style=for-the-badge)]()
+[![Release Date](https://img.shields.io/badge/Updated-16.04.2026-green?style=for-the-badge)]()
 
 ---
 
 </div>
+
+## v6.2 &mdash; AutoQuestClaim, Smart Fishing Ball Selection & Quest Settings Rework
+
+> Brand-new AutoQuestClaim system that pulls a fresh quest every 2 hours and auto-rerolls it, fishing now uses PokeMeow's own ball recommendation (no more rarity guesswork for fish), and quest features are consolidated under a single Quest Settings menu.
+
+<details>
+<summary><b>AutoQuestClaim (New Feature)</b></summary>
+
+&nbsp;
+
+#### Automatic 2-hour quest refresh with built-in re-roll
+
+PokeMeow hands out a new quest slot every ~2 hours. AutoQuestClaim takes care of the full cycle automatically: it pauses the main loop, sends `;q` to refresh the slot, then reuses the existing AutoQuestRenewer logic to re-roll the new quest until it matches your desired categories.
+
+| Feature | Details |
+|:--------|:--------|
+| **Interval** | Configurable in minutes, minimum **120** (2h), default **130** (2h10m) |
+| **Main-loop pause** | Configurable in seconds, minimum **20s** |
+| **Idle-aware** | Waits until the bot is fully idle (no catch/fish/captcha/daily) before running -- never interrupts an active catch |
+| **Shares keyword config** | Uses the same "Quest Categories to Renew" checkboxes as AutoQuestRenewer (battle, fish, receive, catch) |
+| **Scroll limit respected** | Stops renewing automatically when you run out of Quest Reset Scrolls |
+| **Timer anchor** | Timer starts at bot main-loop start (not bot launch), so the first run happens one full interval after hunting begins |
+
+**How to enable:** Config > `[Q]` Quest Settings > `[2]` AutoQuestClaimer Settings
+
+> [!NOTE]
+> AutoQuestClaim does not require AutoQuestRenewer to be enabled. When AutoQuestClaim fires, the renewer logic always runs, regardless of the AutoQuestRenewer toggle. If all keyword categories are disabled, no quests are rerolled.
+
+</details>
+
+<details>
+<summary><b>Smart Fishing Ball Selection (New Feature)</b></summary>
+
+&nbsp;
+
+#### Fishing now reads PokeMeow's built-in ball recommendation
+
+CatchBot now parses this directly and throws the recommended ball, replacing the old MeowHelper rarity-based decision for fishing.
+
+
+
+**Why map Dive/Beast to Masterball?** You don't have `db`/`bb` button shortcuts in PokeMeow's fishing prompt, so the safest throw is the Masterball -- ensuring the catch on any premium fish recommendation.
+
+| Scope | Behavior |
+|:------|:---------|
+| **Fishing (`;f`)** | Uses PokeMeow recommendation -- bypasses rarity rules, whitelist, and event rules |
+| **Regular hunting (`;p` / `;find`)** | Unchanged -- still uses rarity rules, whitelist, event overrides |
+
+Applies to all rod types (`;f` old rod / good rod / super rod).
+
+</details>
+
+<details>
+<summary><b>Quest Settings Menu Restructure (Improvement)</b></summary>
+
+&nbsp;
+
+#### All quest features now live under one menu
+
+Previously `[Q]` in Config opened AutoQuestRenewer directly. With the new AutoQuestClaim, both features are now grouped under a parent **Quest Settings** menu:
+
+```
+Config > [Q] Quest Settings
+ ├─ [1] AutoQuestRenewer Settings   (existing -- unchanged)
+ └─ [2] AutoQuestClaimer Settings   (new)
+      ├─ [1] On/Off
+      ├─ [2] Interval    (minutes, min 120)
+      └─ [3] Pause duration (seconds, min 20)
+```
+
+The main Config overview shows which quest features are active at a glance, e.g. `[Q] ✓ Quest Settings -> (Renewer, Claimer)`.
+
+</details>
+
+<details>
+<summary><b>Under the Hood</b></summary>
+
+&nbsp;
+
+- New Checklist to custom pokemon->custom ball overrides all catchrules
+- All new config values are migrated automatically for existing `config.json` files (no manual edits required)
+
+</details>
+
+---
 
 ## v6.1 &mdash; New Remote Commands, Captcha Retry Fix & QoL
 
