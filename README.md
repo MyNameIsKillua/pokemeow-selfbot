@@ -42,6 +42,18 @@
 >
 > The public Discord server has been closed. DMs on Discord are the only contact channel.
 
+> [!IMPORTANT]
+> **The GitHub repository only contains the source code &mdash; the CatchBot AI captcha model is NOT in the repo.**
+>
+> The model (`catchbot_model_onnx_encrypted/`) is too large for GitHub and is shipped separately on the **[Releases page](https://github.com/MyNameIsKillua/pokemeow-selfbot/releases)**. You have two ways to get a working setup:
+>
+> | Option | What to do |
+> |:-------|:-----------|
+> | **A — Recommended (easiest)** | Go to **Releases** and download the full release ZIP (e.g. `CatchBot-v6.2-Full.zip`). It already contains the source **and** the AI model. Extract and you're done. |
+> | **B — Clone / Download ZIP from the repo** | You only get the source. Go to **Releases**, download the standalone AI model archive (e.g. `CatchBot-Captcha-AI.zip`), extract it, and **drag the `catchbot_model_onnx_encrypted/` folder into your `CatchBot-v6.2-Modular/` folder** so it sits next to `CatchBot.py`. |
+>
+> If you don't want to use the local AI solver at all, you can skip the model entirely and use **2Captcha**, **Anti-Captcha**, or **Manual mode** instead (see [Captcha setup](#-captcha-auto-solve-setup)).
+
 > [!CAUTION]
 > **Self-Bots violate the Discord Terms of Service** and may result in a **permanent account ban**. Use at your own risk. Always use an alt account.
 >
@@ -140,16 +152,41 @@ This is a **Python source release** &mdash; you run it directly from `.py` files
 - **Discord account** with a valid token
 - **PokeMeow channel** &mdash; the channel ID where the bot operates
 
-### 2. Download the Source
+### 2. Get the Code & the AI Model
 
-Clone the repository or download it as a ZIP from GitHub and extract it:
+> [!IMPORTANT]
+> The GitHub repo only contains the **source code**. The **CatchBot AI model** lives on the **[Releases](https://github.com/MyNameIsKillua/pokemeow-selfbot/releases)** page because it is too large for GitHub.
 
-```
-git clone https://github.com/MyNameIsKillua/pokemeow-selfbot.git
-cd pokemeow-selfbot/CatchBot-v6.2-Modular
-```
+Pick **one** of the two paths below:
 
-Or just download the ZIP, extract, and open a terminal inside `CatchBot-v6.2-Modular/`.
+**Path A &mdash; Easiest: download the full release** *(recommended for most people)*
+
+1. Open the **[Releases page](https://github.com/MyNameIsKillua/pokemeow-selfbot/releases)**
+2. Download the latest **Full** release ZIP (e.g. `CatchBot-v6.2-Full.zip`) &mdash; it already contains the source code **and** the AI model.
+3. Extract it anywhere and open a terminal inside the `CatchBot-v6.2-Modular/` folder.
+4. Skip to step 3 (Install Python Dependencies).
+
+**Path B &mdash; Clone the repo + add the AI model manually** *(for developers / contributors)*
+
+1. Clone or download the source from GitHub:
+   ```
+   git clone https://github.com/MyNameIsKillua/pokemeow-selfbot.git
+   cd pokemeow-selfbot/CatchBot-v6.2-Modular
+   ```
+   (Or use the green **Code > Download ZIP** button and extract it.)
+2. Open the **[Releases page](https://github.com/MyNameIsKillua/pokemeow-selfbot/releases)** and download the standalone AI archive (e.g. `CatchBot-Captcha-AI.zip`).
+3. Extract that archive. It will produce a folder named `catchbot_model_onnx_encrypted/`.
+4. **Drag that folder into your `CatchBot-v6.2-Modular/` folder** so it sits right next to `CatchBot.py`. Final layout should look like:
+   ```
+   CatchBot-v6.2-Modular/
+     CatchBot.py
+     launcher.py
+     catchbot_model_onnx_encrypted/   ← the folder you just dragged in
+     core/  config/  ...
+   ```
+
+> [!NOTE]
+> If you don't plan to use the local AI captcha solver, you can skip the model folder entirely and use **2Captcha**, **Anti-Captcha**, or **Manual mode** instead (see [Captcha Auto-Solve Setup](#-config-overview)).
 
 ### 3. Install Python Dependencies
 
@@ -638,7 +675,7 @@ CatchBot-v6.2-Modular/
 | `ModuleNotFoundError: discord` | Run `pip3 install -U discord.py-self` (note the `-self` suffix &mdash; do NOT install plain `discord.py`). |
 | `ModuleNotFoundError: colorama` / `requests` / `aiohttp` | Run the `pip3 install` command from the Installation section. |
 | `ModuleNotFoundError: onnxruntime` / `numpy` / `cryptography` | You want AI captcha &mdash; run `pip3 install -U onnxruntime numpy Pillow cryptography`. |
-| CatchBot AI says "model not found" | Make sure the `catchbot_model_onnx_encrypted/` folder sits next to `CatchBot.py`. |
+| CatchBot AI says "model not found" | The AI model is not in the GitHub repo. Download it from the **[Releases page](https://github.com/MyNameIsKillua/pokemeow-selfbot/releases)** and place the `catchbot_model_onnx_encrypted/` folder next to `CatchBot.py`. |
 | SOCKS5 proxy fails | Run `pip3 install -U aiohttp_socks`. |
 | `!ss` Remote Control command fails | Run `pip3 install -U mss Pillow`. |
 | Login failed | Check token or get a new one. |
