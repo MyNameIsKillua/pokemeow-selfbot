@@ -23,6 +23,7 @@ except ImportError:
 
 from utils.platform import (
     WINDOWS,
+    HAS_PLYER,
     HAS_TOAST,
     HAS_AIOHTTP_SOCKS,
     _show_windows_toast,
@@ -1023,4 +1024,3 @@ class MainLoopMixin:
                 self.save_logs_on_stop()
                 print(f"\n{Fore.YELLOW}Goodbye!{Style.RESET_ALL}")
                 sys.exit(0)
-
