@@ -716,8 +716,14 @@ CatchBot-v6.2-Modular/
 **v6.2 Source Release** &mdash; Created by **MyNameIsKillua**
 
 ### 💬 Contact / Contribute / Donate
-**Discord DM: `MyNameIsKillua`**
+**Discord DM:** <a href="https://discord.com/users/873559728825974874">
+
+  <img src="https://img.shields.io/badge/Discord-MyNameIsKillua-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Contact me on Discord" />
+
+</a>
 
 *(The public Discord server has been closed. DMs are the only contact channel.)*
+
+You can find more of my work on [GitHub](https://github.com/MyNameIsKillua?tab=repositories), visit [mynameiskillua.de](https://mynameiskillua.de), or contact me directly on Discord.
 
 </div>
